@@ -71,7 +71,7 @@ public abstract class Model {
         return Users;
     }
 
-    public ArrayList<AbstractHotelRoomBooking> getBookings() {
+    public ArrayList<AbstractHotelRoomBooking> getHotelRoomBookings() {
         return bookings;
     }
 

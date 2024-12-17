@@ -45,7 +45,7 @@ public class HotelRoomBookingCtrl {
     }
 
     public boolean cancelBooking(String bookingID) {
-        ArrayList<AbstractHotelRoomBooking> bookings = model.getBookings();
+        ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
         for (int i = 0; i < bookings.size(); i++) {
             String ID = bookings.get(i).getBookingID();
             if (ID.equals(bookingID)) {
