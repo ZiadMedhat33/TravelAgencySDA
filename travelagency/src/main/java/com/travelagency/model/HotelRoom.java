@@ -7,14 +7,17 @@ public abstract class HotelRoom {
     protected String HotelRoomID;
     protected boolean Available;
     protected String name;
+    protected Double price;
 
-    public HotelRoom(String Hotel, String City, String Address, String HotelRoomID, boolean Available, String name) {
+    public HotelRoom(String Hotel, String City, String Address, String HotelRoomID, boolean Available, String name,
+            Double price) {
         this.Hotel = Hotel;
         this.City = City;
         this.Address = Address;
         this.HotelRoomID = HotelRoomID;
         this.Available = Available;
         this.name = name;
+        this.price = price;
     }
 
     public String getHotel() {
@@ -65,4 +68,11 @@ public abstract class HotelRoom {
         return name;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

@@ -6,13 +6,15 @@ public abstract class LocalEvent {
     protected String LocalEventID;
     protected String Organizer;
     protected String name;
+    protected Double price;
 
-    public LocalEvent(String address, String city, String localEventID, String organizer, String name) {
+    public LocalEvent(String address, String city, String localEventID, String organizer, String name, Double price) {
         this.Address = address;
         this.City = city;
         this.LocalEventID = localEventID;
         this.Organizer = organizer;
         this.name = name;
+        this.price = price;
     }
 
     public void setAddress(String address) {
@@ -53,5 +55,13 @@ public abstract class LocalEvent {
 
     public String getName() {
         return name;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 }

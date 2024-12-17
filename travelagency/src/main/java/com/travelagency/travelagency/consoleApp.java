@@ -29,7 +29,8 @@ public class consoleApp {
                         HotelRoom room = hotelRooms.get(i);
                         System.out.println("Hotel:" + room.getHotel() + " " + "City:" + room.getCity() + " "
                                 + "Address:" + room.getAddress() + " " + "ID:" + room.getHotelRoomID() + " "
-                                + "Avalible:" + room.getAvailable() + " " + "Name:" + room.getName());
+                                + "Avalible:" + room.getAvailable() + " " + "Name:" + room.getName() + " " + "Price:"
+                                + room.getPrice() + "$");
                     }
                     search = new SearchHotelRoomsByID();
                     hotelManagment.setSearch(search);
@@ -41,7 +42,8 @@ public class consoleApp {
                         HotelRoom room = hotelRooms.get(i);
                         System.out.println("Hotel:" + room.getHotel() + " " + "City:" + room.getCity() + " "
                                 + "Address:" + room.getAddress() + " " + "ID:" + room.getHotelRoomID() + " "
-                                + "Avalible:" + room.getAvailable() + " " + "Name:" + room.getName());
+                                + "Avalible:" + room.getAvailable() + " " + "Name:" + room.getName() + " " + "Price:"
+                                + room.getPrice() + "$");
                     }
                     break;
                 case 2:
@@ -57,7 +59,7 @@ public class consoleApp {
                         LocalEvent event = localEvents.get(i);
                         System.out.println("Address:" + event.getAddress() + " " + "City:" + event.getCity() + " "
                                 + "ID:" + event.getLocalEventID() + " " + "Organizer:" + event.getOrganizer() + " "
-                                + "name:" + event.getName());
+                                + "name:" + event.getName() + " " + "Price:" + event.getPrice() + "$");
                     }
                     System.out
                             .println("enter a id of a local event");
@@ -69,7 +71,7 @@ public class consoleApp {
                         LocalEvent event = localEvents.get(i);
                         System.out.println("Address:" + event.getAddress() + " " + "City:" + event.getCity() + " "
                                 + "ID:" + event.getLocalEventID() + " " + "Organizer:" + event.getOrganizer() + " "
-                                + "name:" + event.getName());
+                                + "name:" + event.getName() + " " + "Price:" + event.getPrice() + "$");
                     }
                 default:
                     break;
