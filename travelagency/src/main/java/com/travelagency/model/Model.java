@@ -6,13 +6,15 @@ public abstract class Model {
     protected ArrayList<HotelRoom> HotelRooms;
     protected ArrayList<LocalEvent> LocalEvents;
     protected ArrayList<User> Users;
-    protected ArrayList<AbstractHotelRoomBooking> bookings;
+    protected ArrayList<AbstractHotelRoomBooking> hotelRoomBookings;
+    protected ArrayList<AbstractLocalEventBooking> localEventBookings;
 
     public Model() {
         HotelRooms = new ArrayList<>();
         LocalEvents = new ArrayList<>();
         Users = new ArrayList<>();
-        bookings = new ArrayList<>();
+        hotelRoomBookings = new ArrayList<>();
+        localEventBookings = new ArrayList<>();
     }
 
     public boolean addHotelRoom(HotelRoom room) {
@@ -51,12 +53,20 @@ public abstract class Model {
         return false;
     }
 
-    public boolean addBooking(AbstractHotelRoomBooking booking) {
-        return bookings.add(booking);
+    public boolean addHotelRoomBooking(AbstractHotelRoomBooking booking) {
+        return hotelRoomBookings.add(booking);
     }
 
-    public boolean removeBooking(AbstractHotelRoomBooking booking) {
-        return bookings.remove(booking);
+    public boolean removeHotelRoomBooking(AbstractHotelRoomBooking booking) {
+        return hotelRoomBookings.remove(booking);
+    }
+
+    public boolean addLocalEventBooking(AbstractLocalEventBooking booking) {
+        return localEventBookings.add(booking);
+    }
+
+    public boolean removeLocalEventBooking(AbstractLocalEventBooking booking) {
+        return localEventBookings.remove(booking);
     }
 
     public ArrayList<HotelRoom> getHotelRooms() {
@@ -71,8 +81,12 @@ public abstract class Model {
         return Users;
     }
 
-    public ArrayList<AbstractHotelRoomBooking> getBookings() {
-        return bookings;
+    public ArrayList<AbstractHotelRoomBooking> getHotelRoomBookings() {
+        return hotelRoomBookings;
+    }
+
+    public ArrayList<AbstractLocalEventBooking> getLocalEventBookings() {
+        return localEventBookings;
     }
 
     public void takeFromDatabaseHotelRooms(String query) {

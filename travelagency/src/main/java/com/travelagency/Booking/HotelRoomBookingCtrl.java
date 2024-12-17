@@ -36,18 +36,18 @@ public class HotelRoomBookingCtrl {
             //notify()
 
             HotelRoomBooking temp = new HotelRoomBooking(bookingID, checkInDate, checkOutDate, userID, hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
-            model.addBooking(temp);
+            model.addHotelRoomBooking(temp);
             return temp;
         }
         return null;
     }
 
     public boolean cancelBooking(String bookingID) {
-        ArrayList<AbstractHotelRoomBooking> bookings = model.getBookings();
+        ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
         for(int i = 0; i<bookings.size(); i++) {
             String ID = bookings.get(i).getBookingID();
             if(ID.equals(bookingID)) {
-                return model.removeBooking(bookings.get(i));
+                return model.removeHotelRoomBooking(bookings.get(i));
             }
         }
         return false;

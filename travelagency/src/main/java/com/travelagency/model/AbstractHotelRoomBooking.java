@@ -12,7 +12,7 @@ public abstract class AbstractHotelRoomBooking {
     protected String hotel;
     protected double fees;
 
-    public AbstractHotelRoomBooking(String bookingID,  Date checkInDate,  Date checkOutDate, String userID, String hotelRoomID, String hotel, double fees) {
+    protected AbstractHotelRoomBooking(String bookingID,  Date checkInDate,  Date checkOutDate, String userID, String hotelRoomID, String hotel, double fees) {
         this.bookingID = bookingID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
