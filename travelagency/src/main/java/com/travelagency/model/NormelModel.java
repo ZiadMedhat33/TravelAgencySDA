@@ -74,23 +74,23 @@ public class NormelModel extends Model {
                 // events
                 LocalEvents
                                 .add(new NormalLocalEvent("123 Main St", "Springfield", "E001", "John Doe",
-                                                "Tech Conference", 50.00));
+                                                "Tech Conference", 50.00, 5));
                 LocalEvents
                                 .add(new NormalLocalEvent("456 Oak Ave", "Shelbyville", "E002", "Jane Smith",
-                                                "Food Festival", 30.00));
+                                                "Food Festival", 30.00, 10));
                 LocalEvents.add(
                                 new NormalLocalEvent("789 Pine Rd", "Capital City", "E003", "Alice Johnson",
-                                                "Music Concert", 75.00));
+                                                "Music Concert", 75.00, 20));
         }
 
         public void takeFromLocalEventProvider() {
                 // Will return local events from the local event provider using API
                 LocalEvents.add(new NormalLocalEvent("111 Elm St", "Greenville", "E004", "Bob Brown", "Art Exhibition",
-                                40.00));
+                                40.00, 30));
                 LocalEvents.add(new NormalLocalEvent("222 Maple Ave", "Riverside", "E005", "Karen White", "Book Fair",
-                                25.00));
+                                25.00, 22));
                 LocalEvents.add(new NormalLocalEvent("333 Cedar Rd", "Hill Valley", "E006", "Tom Clark", "Charity Run",
-                                60.00));
+                                60.00, 30));
         }
 
 }
