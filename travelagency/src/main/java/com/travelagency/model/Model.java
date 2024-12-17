@@ -51,11 +51,11 @@ public abstract class Model {
         return false;
     }
 
-    public boolean addBooking(AbstractHotelRoomBooking booking) {
+    public boolean addHotelRoomBooking(AbstractHotelRoomBooking booking) {
         return bookings.add(booking);
     }
 
-    public boolean removeBooking(AbstractHotelRoomBooking booking) {
+    public boolean removeHotelRoomBooking(AbstractHotelRoomBooking booking) {
         return bookings.remove(booking);
     }
 
@@ -91,5 +91,9 @@ public abstract class Model {
 
     public void takeFromLocalEventProvider() {
         // will return local events from the local event provider using API
+    }
+
+    public void takeFromDatabaseHotelBookings() {
+        // mimicking that it worte a query to take from database hotel room bookings
     }
 }

@@ -1,18 +1,19 @@
 package com.travelagency.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class AbstractHotelRoomBooking {
 
     protected String bookingID;
-    protected Date checkInDate;
-    protected Date checkOutDate;
+    protected LocalDate checkInDate;
+    protected LocalDate checkOutDate;
     protected String userID;
     protected String hotelRoomID;
     protected String hotel;
     protected double fees;
 
-    public AbstractHotelRoomBooking(String bookingID,  Date checkInDate,  Date checkOutDate, String userID, String hotelRoomID, String hotel, double fees) {
+    public AbstractHotelRoomBooking(String bookingID, LocalDate checkInDate, LocalDate checkOutDate, String userID,
+            String hotelRoomID, String hotel, double fees) {
         this.bookingID = bookingID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -26,11 +27,11 @@ public abstract class AbstractHotelRoomBooking {
         return bookingID;
     }
 
-    public Date getCheckInDate() {
+    public LocalDate getCheckInDate() {
         return checkInDate;
     }
 
-    public Date getCheckOutDate() {
+    public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
 
