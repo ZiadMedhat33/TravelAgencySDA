@@ -6,13 +6,15 @@ public abstract class Model {
     protected ArrayList<HotelRoom> HotelRooms;
     protected ArrayList<LocalEvent> LocalEvents;
     protected ArrayList<User> Users;
-    protected ArrayList<AbstractHotelRoomBooking> bookings;
+    protected ArrayList<AbstractHotelRoomBooking> hotelRoomBookings;
+    protected ArrayList<AbstractLocalEventBooking> localEventBookings;
 
     public Model() {
         HotelRooms = new ArrayList<>();
         LocalEvents = new ArrayList<>();
         Users = new ArrayList<>();
-        bookings = new ArrayList<>();
+        hotelRoomBookings = new ArrayList<>();
+        localEventBookings = new ArrayList<>();
     }
 
     public boolean addHotelRoom(HotelRoom room) {
@@ -52,11 +54,19 @@ public abstract class Model {
     }
 
     public boolean addHotelRoomBooking(AbstractHotelRoomBooking booking) {
-        return bookings.add(booking);
+        return hotelRoomBookings.add(booking);
     }
 
     public boolean removeHotelRoomBooking(AbstractHotelRoomBooking booking) {
-        return bookings.remove(booking);
+        return hotelRoomBookings.remove(booking);
+    }
+
+    public boolean addLocalEventBooking(AbstractLocalEventBooking booking) {
+        return localEventBookings.add(booking);
+    }
+
+    public boolean removeLocalEventBooking(AbstractLocalEventBooking booking) {
+        return localEventBookings.remove(booking);
     }
 
     public ArrayList<HotelRoom> getHotelRooms() {
@@ -72,7 +82,11 @@ public abstract class Model {
     }
 
     public ArrayList<AbstractHotelRoomBooking> getHotelRoomBookings() {
-        return bookings;
+        return hotelRoomBookings;
+    }
+
+    public ArrayList<AbstractLocalEventBooking> getLocalEventBookings() {
+        return localEventBookings;
     }
 
     public void takeFromDatabaseHotelRooms(String query) {
