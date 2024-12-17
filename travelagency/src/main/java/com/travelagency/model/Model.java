@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public abstract class Model {
     protected ArrayList<HotelRoom> HotelRooms;
     protected ArrayList<LocalEvent> LocalEvents;
+    protected ArrayList<AbstractHotelRoomBooking> bookings;
 
     public Model() {
         HotelRooms = new ArrayList<>();
         LocalEvents = new ArrayList<>();
+        bookings = new ArrayList<>();
     }
 
     public boolean addHotelRoom(HotelRoom room) {
@@ -35,12 +37,24 @@ public abstract class Model {
         return false;
     }
 
+    public boolean addBooking(AbstractHotelRoomBooking booking) {
+        return bookings.add(booking);
+    }
+
+    public boolean removeBooking(AbstractHotelRoomBooking booking) {
+        return bookings.remove(booking);
+    }
+
     public ArrayList<HotelRoom> getHotelRooms() {
         return HotelRooms;
     }
 
     public ArrayList<LocalEvent> getLocalEvents() {
         return LocalEvents;
+    }
+
+    public ArrayList<AbstractHotelRoomBooking> getBookings() {
+        return bookings;
     }
 
     public void takeFromDatabaseHotelRooms(String query) {
