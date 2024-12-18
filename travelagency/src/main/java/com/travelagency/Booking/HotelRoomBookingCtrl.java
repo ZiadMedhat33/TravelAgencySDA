@@ -24,7 +24,7 @@ public class HotelRoomBookingCtrl {
         return hotelRoom.getAvailable();
     }
 
-    public HotelRoomBooking createBooking(HotelRoom hotelRoom, LocalDate checkInDate, LocalDate checkOutDate,
+    public AbstractHotelRoomBooking createBooking(HotelRoom hotelRoom, LocalDate checkInDate, LocalDate checkOutDate,
             String userID) {
         if (checkAvailability(hotelRoom)) {
             String uuid = UUID.randomUUID().toString();
@@ -33,10 +33,9 @@ public class HotelRoomBookingCtrl {
             int diffInDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
 
             double fees = feesCalculator.calculateFees(hotelRoom.getPrice(), diffInDays);
-
+            hotelRoom.setAvailable(false);
             // notify()
-
-            HotelRoomBooking temp = new HotelRoomBooking(bookingID, checkInDate, checkOutDate, userID,
+            AbstractHotelRoomBooking temp = new HotelRoomBooking(bookingID, checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
             model.addHotelRoomBooking(temp);
             return temp;
@@ -48,7 +47,9 @@ public class HotelRoomBookingCtrl {
         ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
         for (int i = 0; i < bookings.size(); i++) {
             String ID = bookings.get(i).getBookingID();
+            HotelRoom room = model.getHotelRoomWithID(bookings.get(i).getHotelRoomID());
             if (ID.equals(bookingID)) {
+                room.setAvailable(true);
                 return model.removeHotelRoomBooking(bookings.get(i));
             }
         }

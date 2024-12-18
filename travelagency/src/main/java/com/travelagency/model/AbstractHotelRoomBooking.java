@@ -50,5 +50,4 @@ public abstract class AbstractHotelRoomBooking {
     public double getFees() {
         return fees;
     }
-
 }

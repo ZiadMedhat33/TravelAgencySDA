@@ -89,6 +89,66 @@ public abstract class Model {
         return localEventBookings;
     }
 
+    public User getUserWithID(String id) {
+        User user = null;
+        for (int i = 0; i < Users.size(); i++) {
+            String userID = Users.get(i).getUserID();
+            if (id.equals(userID)) {
+                user = Users.get(i);
+                break;
+            }
+        }
+        return user;
+    }
+
+    public HotelRoom getHotelRoomWithID(String id) {
+        HotelRoom room = null;
+        for (int i = 0; i < HotelRooms.size(); i++) {
+            String roomID = HotelRooms.get(i).getHotelRoomID();
+            if (id.equals(roomID)) {
+                room = HotelRooms.get(i);
+                break;
+            }
+        }
+        return room;
+    }
+
+    public LocalEvent getLocalEventWithID(String id) {
+        LocalEvent event = null;
+        for (int i = 0; i < LocalEvents.size(); i++) {
+            String eventID = LocalEvents.get(i).getLocalEventID();
+            if (id.equals(eventID)) {
+                event = LocalEvents.get(i);
+                break;
+            }
+        }
+        return event;
+    }
+
+    public AbstractHotelRoomBooking getHotelRoomBookingWithId(String id) {
+        AbstractHotelRoomBooking booking = null;
+        for (int i = 0; i < hotelRoomBookings.size(); i++) {
+            String bookingID = hotelRoomBookings.get(i).getBookingID();
+            if (id.equals(bookingID)) {
+                booking = hotelRoomBookings.get(i);
+                break;
+            }
+        }
+        return booking;
+    }
+
+    public AbstractLocalEventBooking getLocalEventBookingWithId(String id) {
+        AbstractLocalEventBooking booking = null;
+        for (int i = 0; i < localEventBookings.size(); i++) {
+            String bookingID = localEventBookings.get(i).getBookingID();
+            if (id.equals(bookingID)) {
+                booking = localEventBookings.get(i);
+                break;
+            }
+        }
+        return booking;
+    }
+
     public void takeFromDatabaseHotelRooms(String query) {
         // mimicking that it worte a query to take from database and returned hotel
         // rooms

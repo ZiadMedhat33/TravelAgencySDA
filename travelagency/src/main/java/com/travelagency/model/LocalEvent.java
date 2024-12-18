@@ -9,7 +9,8 @@ public abstract class LocalEvent {
     protected Double price;
     protected int numOfTickets;
 
-    public LocalEvent(String address, String city, String localEventID, String organizer, String name, Double price, int numOfTickets) {
+    public LocalEvent(String address, String city, String localEventID, String organizer, String name, Double price,
+            int numOfTickets) {
         this.Address = address;
         this.City = city;
         this.LocalEventID = localEventID;
@@ -69,5 +70,9 @@ public abstract class LocalEvent {
 
     public int getNumOfTickets() {
         return numOfTickets;
+    }
+
+    public void setNumOfTickets(int numOfTickets) {
+        this.numOfTickets = numOfTickets;
     }
 }

@@ -3,7 +3,6 @@ package com.travelagency.travelagency;
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.travelagency.model.*;
-import com.travelagency.Booking.HotelRoomBookingCtrl;
 import com.travelagency.HotelManagment.*;
 import com.travelagency.LocalEventManagment.*;
 import com.travelagency.Booking.*;
@@ -15,6 +14,7 @@ public class consoleApp {
         System.out.println("press 1 to search/view hotel rooms");
         System.out.println("press 2 to search/view local events");
         System.out.println("press 3 to add Hotel Room booking");
+        System.out.println("press 4 to add Hotel Room booking");
         System.out.println("press -1 to exit");
         Scanner input = new Scanner(System.in);
         while (true) {
@@ -97,6 +97,20 @@ public class consoleApp {
                                         booking.getHotel() + " " +
                                         booking.getFees());
 
+                    }
+                    break;
+                case 4:
+                    LocalEvent event = model.getLocalEvents().get(0);
+                    LocalEventBookingCtrl eventBookingCtr = new LocalEventBookingCtrl(model);
+                    eventBookingCtr.createBooking("999", event);
+                    ArrayList<AbstractLocalEventBooking> events = model.getLocalEventBookings();
+                    for (int i = 0; i < events.size(); i++) {
+                        AbstractLocalEventBooking eventBooking = events.get(i);
+                        System.out.println(
+                                eventBooking.getBookingID() + " " +
+                                        eventBooking.getUserID() + " " +
+                                        eventBooking.getLocalEventID() + " " +
+                                        eventBooking.getFees());
                     }
             }
             if (number == -1)
