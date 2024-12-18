@@ -2,24 +2,16 @@ package com.travelagency.Dashboard;
 import com.travelagency.model.*;
 public class DashboardAbstract{
   protected DisplayStrategy display;
-  protected String email;
-  protected String username;
+  protected User user;
   protected Model model;
-  public DashboardAbstract(Model model, String email, String username){
+  public DashboardAbstract(Model model, User user){
     this.model = model;
-    this.email = email;
-    this.username = username;
-  }
-  public String getUsername() {
-    return username;
-  }
-  public String getEmail() {
-    return email;
+    this.user = user;
   }
   public void setDisplay(DisplayStrategy _display){
     display = _display;
   }
   public void display(){
-    display.display(model);
+    display.display(user,model);
   }
 }
