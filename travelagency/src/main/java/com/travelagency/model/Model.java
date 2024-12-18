@@ -47,6 +47,13 @@ public abstract class Model {
         return false;
     }
 
+    public boolean addUser(User user) {
+        if(Users.add(user)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean addHotelRoomUser(User user) {
         if (Users.add(user))
             return true;

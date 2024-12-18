@@ -6,6 +6,16 @@ public abstract class User {
     protected String userID;
     protected String Mail;
     protected String phoneNumber;
+    protected boolean isLoggedIn;
+
+    public User(String username, String password, String userID, String Mail, String phoneNumber, boolean isLoggedIn) {
+        this.username = username;
+        this.password = password;
+        this.userID = userID;
+        this.Mail = Mail;
+        this.phoneNumber = phoneNumber;
+        this.isLoggedIn = isLoggedIn;
+    }
 
     public void setMail(String mail) {
         Mail = mail;
@@ -45,5 +55,13 @@ public abstract class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public boolean getIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
     }
 }
