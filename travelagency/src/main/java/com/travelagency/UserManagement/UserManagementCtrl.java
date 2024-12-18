@@ -1,4 +1,5 @@
 package com.travelagency.UserManagement;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -16,9 +17,9 @@ public class UserManagementCtrl {
         this.model = model;
     }
 
-    public boolean login(String userName, String password){
+    public boolean login(String userName, String password) {
         User user = validationMethod.validateCredentials(userName, password, model.getUsers());
-        if(user!=null) {
+        if (user != null) {
             user.setLoggedIn(true);
             return true;
         }
@@ -27,14 +28,14 @@ public class UserManagementCtrl {
 
     public boolean logout(String userID) {
         User user = model.getUserWithID(userID);
-        if(user!=null) {
+        if (user != null) {
             user.setLoggedIn(false);
             return true;
         }
         return false;
     }
 
-    public boolean register(String userName, String password, String mail, String phoneNumber){
+    public boolean register(String userName, String password, String mail, String phoneNumber) {
 
         String uuid = UUID.randomUUID().toString();
         String userID = uuid.substring(0, 9);
@@ -42,30 +43,31 @@ public class UserManagementCtrl {
         ArrayList<User> allUsers = model.getUsers();
         boolean available = true;
 
-        for(int i = 0; i<allUsers.size(); i++) {
+        for (int i = 0; i < allUsers.size(); i++) {
             String name = allUsers.get(i).getUsername();
             String number = allUsers.get(i).getPhoneNumber();
             String email = allUsers.get(i).getMail();
 
-            if(userName.equals(name) || mail.equals(email) || phoneNumber.equals(number)) {
+            if (userName.equals(name) || mail.equals(email) || phoneNumber.equals(number)) {
                 available = false;
-            }    
+            }
         }
 
-        if(available) {
+        if (available) {
             User user = new StandardUser(userName, password, userID, mail, phoneNumber, false);
             model.addUser(user);
             return true;
-        }
-        else return false;
+        } else
+            return false;
 
     }
-    public boolean updatePassword(String userID, String newPassword){
+
+    public boolean updatePassword(String userID, String newPassword) {
         User user = model.getUserWithID(userID);
         String userName = user.getUsername();
         String password = user.getPassword();
-        if(validationMethod.validateCredentials(userName,password,model.getUsers())!=null) {
-            if(user.getIsLoggedIn()) {
+        if (validationMethod.validateCredentials(userName, password, model.getUsers()) != null) {
+            if (user.getIsLoggedIn()) {
                 user.setPassword(password);
                 return true;
             }
@@ -73,4 +75,42 @@ public class UserManagementCtrl {
         return false;
     }
 
+    public boolean checkMail(String mail) {
+        boolean found = false;
+        ArrayList<User> users = model.getUsers();
+        for (int i = 0; i < users.size(); i++) {
+            String userMail = users.get(i).getMail();
+            if (mail.equals(userMail)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
+    public boolean checkPhoneNumber(String number) {
+        boolean found = false;
+        ArrayList<User> users = model.getUsers();
+        for (int i = 0; i < users.size(); i++) {
+            String userNumber = users.get(i).getPhoneNumber();
+            if (number.equals(userNumber)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
+    public boolean checkID(String ID) {
+        boolean found = false;
+        ArrayList<User> users = model.getUsers();
+        for (int i = 0; i < users.size(); i++) {
+            String userID = users.get(i).getUserID();
+            if (ID.equals(userID)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
 }
