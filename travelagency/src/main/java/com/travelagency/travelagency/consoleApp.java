@@ -81,10 +81,10 @@ public class consoleApp {
                     break;
                 case 3:
                     HotelRoom room = model.getHotelRooms().get(0);
-                    HotelRoomBookingCtrl bookingCtr = new HotelRoomBookingCtrl(model);
+                    // HotelRoomBookingCtrl bookingCtr = new HotelRoomBookingCtrl(model);
                     LocalDate checkInDate = LocalDate.of(2024, 6, 15);
                     LocalDate checkOutDate = LocalDate.of(2024, 6, 20);
-                    bookingCtr.createBooking(room, checkInDate, checkOutDate, "999");
+                    // bookingCtr.createBooking(room, checkInDate, checkOutDate, "999");
                     ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
                     for (int i = 0; i < bookings.size(); i++) {
                         AbstractHotelRoomBooking booking = bookings.get(i);

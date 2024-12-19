@@ -9,13 +9,16 @@ import com.travelagency.model.HotelRoomBooking;
 import com.travelagency.model.Model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import com.travelagency.NotificationModule.*;
+import com.travelagency.model.User;
 
 public class HotelRoomBookingCtrl {
 
-    protected Model model;
+    private Model model;
+    private NotificationManager notificationManager;
     IHotelFeesCalculator feesCalculator;
 
-    public HotelRoomBookingCtrl(Model model) {
+    public HotelRoomBookingCtrl(Model model, NotificationManager notificationManager) {
         this.model = model;
         feesCalculator = new HotelFeesCalculator();
     }
@@ -34,7 +37,13 @@ public class HotelRoomBookingCtrl {
 
             double fees = feesCalculator.calculateFees(hotelRoom.getPrice(), diffInDays);
             hotelRoom.setAvailable(false);
-            // notify()
+            User user = model.getUserWithID(userID);
+            TemplateText template = new HotelBookingTemplate();
+            ArrayList<String> placeholders = new ArrayList<>();
+            placeholders.add(user.getUsername());
+            placeholders.add(hotelRoom.getName());
+            NotificationRequest request = new NotificationRequest("email", user, template, placeholders);
+            notificationManager.requestNotification(request);
             AbstractHotelRoomBooking temp = new HotelRoomBooking(bookingID, checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
             model.addHotelRoomBooking(temp);
