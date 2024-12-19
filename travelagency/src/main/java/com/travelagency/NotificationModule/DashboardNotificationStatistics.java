@@ -1,10 +1,14 @@
 package com.travelagency.NotificationModule;
 import java.util.Map;
+
+import com.travelagency.model.Notifications;
+
 import java.util.HashMap;
 public class DashboardNotificationStatistics extends NotificationStatistics {
     private Map<String, Integer> dashboardTemplates;
     private static DashboardNotificationStatistics instance = null;
-    private DashboardNotificationStatistics(){
+    private DashboardNotificationStatistics(Notifications notificationsData){
+        super(notificationsData);
         dashboardTemplates = new HashMap<>();
     }
     public void addNotification(Notification notification){
@@ -13,17 +17,17 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
             DashboardNotification dash = (DashboardNotification) notification;
             dashboardTemplates.put(dash.getTemplateName(), dashboardTemplates.getOrDefault(dash.getTemplateName(), 0)+1);
         }
-        notifications.add(notification);
+        notificationsData.addNotification(notification);
     }
     @Override
     public String getMostNotified(){
         String dash = getMostUsedFromMap(dashboardTemplates);
         return dash;
     }
-    public static DashboardNotificationStatistics getInstance()
+    public static DashboardNotificationStatistics getInstance(Notifications notificationsData)
     {
         if (instance == null)
-        instance = new DashboardNotificationStatistics();
+        instance = new DashboardNotificationStatistics(notificationsData);
  
         return instance;
     }

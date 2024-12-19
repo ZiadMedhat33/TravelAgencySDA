@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.travelagency.model.User;
 
-public class DashboardMaker extends NotificationMaker{//needs modification
+public class DashboardMaker extends NotificationMaker{
     DashboardMaker(QueueHandler queueHandler, TemplateMaker maker){
         super(queueHandler, maker);
     }
