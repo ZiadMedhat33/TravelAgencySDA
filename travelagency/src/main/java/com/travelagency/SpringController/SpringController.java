@@ -73,7 +73,7 @@ public class SpringController {
         return ctrl.Register(userName, password, mail, phoneNumber);
     }
 
-    @GetMapping("login/{username}/{password}")
+    @PostMapping("login/{username}/{password}")
     public User login(@PathVariable("username") String username, @PathVariable("password") String password) {
         UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(),
                 model, manager);
