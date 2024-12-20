@@ -13,6 +13,10 @@ public class MakerInitializer {
     }
 
     public NotificationMaker getMaker(String type) {
+        if(makers.get(type) == null){
+            System.out.println("The invalid type is" + type);
+            return makers.get("email");
+        }
         return makers.get(type);
     }
 }

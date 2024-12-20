@@ -19,7 +19,11 @@ public class NotificationManager {
     public void setVariables(TemplateText template, String typeOfNotification) {
         TemplateMaker templateMaker = new TemplateMaker(template);
         this.makerSetter = new MakerInitializer(queueHandler, templateMaker);
-        maker.setNotificationMaker(makerSetter.getMaker(typeOfNotification));
+        if(maker == null){
+            maker = new BaseDecorator(makerSetter.getMaker(typeOfNotification));
+        }else{
+            maker.setNotificationMaker(makerSetter.getMaker(typeOfNotification));
+        }
         statistics = statisticsSetter.getStatisticsType(typeOfNotification);
         if (maker == null || statistics == null) {
             throw new IllegalArgumentException("Invalid notification type: " + typeOfNotification);
