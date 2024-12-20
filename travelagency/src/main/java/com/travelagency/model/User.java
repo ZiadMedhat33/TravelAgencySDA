@@ -1,5 +1,7 @@
 package com.travelagency.model;
 
+import java.util.ArrayList;
+
 public abstract class User {
     protected String username;
     protected String password;
@@ -7,6 +9,7 @@ public abstract class User {
     protected String Mail;
     protected String phoneNumber;
     protected boolean isLoggedIn;
+    protected ArrayList<LocalEvent> recommendedEvents;
 
     public User(String username, String password, String userID, String Mail, String phoneNumber, boolean isLoggedIn) {
         this.username = username;
@@ -63,5 +66,13 @@ public abstract class User {
 
     public void setLoggedIn(boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
+    }
+
+    public ArrayList<LocalEvent> getRecommendedEvents() {
+        return recommendedEvents;
+    }
+
+    public void setRecommendedEvents(ArrayList<LocalEvent> recommendedEvents) {
+        this.recommendedEvents = recommendedEvents;
     }
 }

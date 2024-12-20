@@ -16,11 +16,13 @@ public class HotelRoomBookingCtrl {
 
     private Model model;
     private NotificationManager notificationManager;
-    IHotelFeesCalculator feesCalculator;
+    private IHotelFeesCalculator feesCalculator;
+    private IrecommendEvents recommender;
 
     public HotelRoomBookingCtrl(Model model, NotificationManager notificationManager) {
         this.model = model;
         feesCalculator = new HotelFeesCalculator();
+        recommender = new RecommendEventsSameCity();
     }
 
     public boolean checkAvailability(HotelRoom hotelRoom) {
@@ -30,20 +32,22 @@ public class HotelRoomBookingCtrl {
     public AbstractHotelRoomBooking createBooking(HotelRoom hotelRoom, LocalDate checkInDate, LocalDate checkOutDate,
             String userID) {
         if (checkAvailability(hotelRoom)) {
+            User user = model.getUserWithID(userID);
+            if (user == null) {
+                return null;
+            }
             String uuid = UUID.randomUUID().toString();
             String bookingID = uuid.substring(0, 8);
-
             int diffInDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
-
             double fees = feesCalculator.calculateFees(hotelRoom.getPrice(), diffInDays);
             hotelRoom.setAvailable(false);
-            User user = model.getUserWithID(userID);
             TemplateText template = new HotelBookingTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
             placeholders.add(hotelRoom.getName());
             NotificationRequest request = new NotificationRequest("email", user, template, placeholders);
             notificationManager.requestNotification(request);
+            user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
             AbstractHotelRoomBooking temp = new HotelRoomBooking(bookingID, checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
             model.addHotelRoomBooking(temp);
@@ -71,5 +75,21 @@ public class HotelRoomBookingCtrl {
 
     public IHotelFeesCalculator getFeesCalculator() {
         return feesCalculator;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setNotificationManager(NotificationManager notificationManager) {
+        this.notificationManager = notificationManager;
+    }
+
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
     }
 }

@@ -7,6 +7,7 @@ import com.travelagency.model.AbstractLocalEventBooking;
 import com.travelagency.model.LocalEvent;
 import com.travelagency.model.LocalEventBooking;
 import com.travelagency.model.Model;
+import com.travelagency.model.User;
 
 public class LocalEventBookingCtrl {
 
@@ -24,7 +25,9 @@ public class LocalEventBookingCtrl {
 
     public LocalEventBooking createBooking(String userID, LocalEvent localEvent) {
         if (checkAvailability(localEvent)) {
-
+            User user = model.getUserWithID(userID);
+            if (user == null)
+                return null;
             String uuid = UUID.randomUUID().toString();
             String bookingID = uuid.substring(0, 5);
             Integer numOfTickets = localEvent.getNumOfTickets();
