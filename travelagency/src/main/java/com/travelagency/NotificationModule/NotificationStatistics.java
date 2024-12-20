@@ -16,23 +16,13 @@ public abstract class NotificationStatistics {
     public abstract void addNotification(Notification notification);
 
     public int getNumberOfSuccessfull() {
-        int counter = 0;
-        ArrayList<Notification> notifications = notificationsData.getStatusNotifications(false);
-        for (Notification notification : notifications) {
-            if (notification.getStatus() == true)
-                counter++;
-        }
-        return counter;
+        ArrayList<Notification> notifications = notificationsData.getStatusNotifications(true);
+        return notifications.size();
     }
 
     public int getNumberOfUnSuccessfull() {
-        int counter = 0;
-        ArrayList<Notification> notifications = notificationsData.getStatusNotifications(true);
-        for (Notification notification : notifications) {
-            if (notification.getStatus() == false)
-                counter++;
-        }
-        return counter;
+        ArrayList<Notification> notifications = notificationsData.getStatusNotifications(false);
+        return notifications.size();
     }
 
     public String getMostUsedFromMap(Map<String, Integer> map) {

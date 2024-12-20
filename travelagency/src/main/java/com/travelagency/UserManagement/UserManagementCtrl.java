@@ -66,7 +66,6 @@ public class UserManagementCtrl {
                     template, placeholders);
             NotificationRequest request2 = new NotificationRequest("sms", user, template,
                     placeholders);
-
             notificationManager.requestNotification(request1);
             notificationManager.requestNotification(request2);
             return user;

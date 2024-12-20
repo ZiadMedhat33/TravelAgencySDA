@@ -36,7 +36,6 @@ public class QueueHandler {
         while (!notificationQueue.isEmpty()) {
             Notification toBeSent = notificationQueue.poll();
             NotificationSender sender = setter.getSender(toBeSent.getType());
-            System.out.println(toBeSent.getType());
             if (sender != null) {
                 sender.sendNotification(toBeSent, notificationsData, usersModel);
             } else {

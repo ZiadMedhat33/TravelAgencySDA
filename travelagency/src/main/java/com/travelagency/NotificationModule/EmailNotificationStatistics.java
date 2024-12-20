@@ -11,7 +11,7 @@ public class EmailNotificationStatistics extends NotificationStatistics {
         super(notificationsData);
         emailMap = new HashMap<>();
     }
-
+    @Override
     public void addNotification(Notification notification) {
         templateMap.put(notification.getTemplateName(),
                 templateMap.getOrDefault(notification.getTemplateName(), 0) + 1);
@@ -19,7 +19,6 @@ public class EmailNotificationStatistics extends NotificationStatistics {
             Email mail = (Email) notification;
             emailMap.put(mail.getEmail(), emailMap.getOrDefault(mail.getEmail(), 0) + 1);
         }
-        notificationsData.addNotification(notification);
     }
 
     @Override

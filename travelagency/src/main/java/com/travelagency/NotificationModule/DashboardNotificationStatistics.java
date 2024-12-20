@@ -11,7 +11,7 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
         super(notificationsData);
         dashboardTemplates = new HashMap<>();
     }
-
+    @Override
     public void addNotification(Notification notification) {
         templateMap.put(notification.getTemplateName(),
                 templateMap.getOrDefault(notification.getTemplateName(), 0) + 1);
@@ -20,7 +20,6 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
             dashboardTemplates.put(dash.getTemplateName(),
                     dashboardTemplates.getOrDefault(dash.getTemplateName(), 0) + 1);
         }
-        notificationsData.addNotification(notification);
     }
 
     @Override

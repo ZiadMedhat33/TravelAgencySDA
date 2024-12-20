@@ -11,7 +11,7 @@ public class Notifications {
 
     public ArrayList<Notification> getStatusNotifications(boolean status) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
-        for (Notification notification : chosenNotifications) {
+        for (Notification notification : notifications) {
             if (notification.getStatus() == status)
                 chosenNotifications.add(notification);
         }
