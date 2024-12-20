@@ -1,5 +1,6 @@
 package com.travelagency.Booking;
 
+import java.util.ArrayList;
 import com.travelagency.model.AbstractHotelRoomBooking;
 import com.travelagency.model.HotelRoom;
 import com.travelagency.model.HotelRoomBooking;
@@ -33,18 +34,17 @@ public class HotelRoomBookingCtrl {
             if (user == null || !user.getIsLoggedIn()) {
                 return null;
             }
-
             int diffInDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
             double fees = feesCalculator.calculateFees(hotelRoom.getPrice(), diffInDays);
             hotelRoom.setAvailable(false);
             System.out.println(diffInDays);
-            // TemplateText template = new HotelBookingTemplate();
-            // ArrayList<String> placeholders = new ArrayList<>();
-            // placeholders.add(user.getUsername());
-            // placeholders.add(hotelRoom.getName());
-            // NotificationRequest request = new NotificationRequest("email", user,
-            // template, placeholders);
-            // notificationManager.requestNotification(request);
+            TemplateText template = new HotelBookingTemplate();
+            ArrayList<String> placeholders = new ArrayList<>();
+            placeholders.add(user.getUsername());
+            placeholders.add(hotelRoom.getName());
+            NotificationRequest request = new NotificationRequest("email", user,
+                    template, placeholders);
+            notificationManager.requestNotification(request);
             user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
             AbstractHotelRoomBooking temp = new HotelRoomBooking(checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);

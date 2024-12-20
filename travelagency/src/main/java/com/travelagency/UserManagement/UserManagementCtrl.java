@@ -1,7 +1,6 @@
 package com.travelagency.UserManagement;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import com.travelagency.NotificationModule.NotificationManager;
 import com.travelagency.NotificationModule.NotificationRequest;
@@ -44,9 +43,6 @@ public class UserManagementCtrl {
 
     public User Register(String userName, String password, String mail, String phoneNumber) {
 
-        String uuid = UUID.randomUUID().toString();
-        String userID = uuid.substring(0, 9);
-
         ArrayList<User> allUsers = model.getUsers();
         boolean available = true;
 
@@ -62,17 +58,17 @@ public class UserManagementCtrl {
 
         if (available) {
             User user = new StandardUser(userName, password, mail, phoneNumber, false);
-            // TemplateText template = new RegisterTemplate();
+            model.addUser(user);
+            TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            // NotificationRequest request1 = new NotificationRequest("email", user,
-            // template, placeholders);
-            // NotificationRequest request2 = new NotificationRequest("sms", user, template,
-            // placeholders);
+            NotificationRequest request1 = new NotificationRequest("email", user,
+                    template, placeholders);
+            NotificationRequest request2 = new NotificationRequest("sms", user, template,
+                    placeholders);
 
-            // notificationManager.requestNotification(request1);
-            // notificationManager.requestNotification(request2);
-            model.addUser(user);
+            notificationManager.requestNotification(request1);
+            notificationManager.requestNotification(request2);
             return user;
         } else
             return null;
@@ -88,15 +84,15 @@ public class UserManagementCtrl {
         if (validationMethod.validateCredentials(userName, password, model.getUsers()) != null) {
             if (user.getIsLoggedIn()) {
                 user.setPassword(newPassword);
-                // TemplateText template = new ResetPasswordTemplate();
-                // ArrayList<String> placeholders = new ArrayList<>();
-                // placeholders.add(user.getUsername());
-                // NotificationRequest request1 = new NotificationRequest("email", user,
-                // template, placeholders);
-                // NotificationRequest request2 = new NotificationRequest("sms", user, template,
-                // placeholders);
-                // notificationManager.requestNotification(request1);
-                // notificationManager.requestNotification(request2);
+                TemplateText template = new ResetPasswordTemplate();
+                ArrayList<String> placeholders = new ArrayList<>();
+                placeholders.add(user.getUsername());
+                NotificationRequest request1 = new NotificationRequest("email", user,
+                        template, placeholders);
+                NotificationRequest request2 = new NotificationRequest("sms", user, template,
+                        placeholders);
+                notificationManager.requestNotification(request1);
+                notificationManager.requestNotification(request2);
                 return user;
             }
         }

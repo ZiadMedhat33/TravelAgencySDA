@@ -182,6 +182,14 @@ public abstract class Model {
         // mimicking that it worte a query to take from database hotel room bookings
     }
 
+    public void takeFromDatabaseUsers() {
+        // mimicking that it worte a query to take from database users
+    }
+
+    public void takeFromDatabaseLocalEventBookings() {
+        // mimicking that it worte a query to take from database local event bookings
+    }
+
     public void updateDataBase(String query) {
         // mimicking that it updates the database by writing a query
     }

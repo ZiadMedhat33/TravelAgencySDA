@@ -36,13 +36,13 @@ public class LocalEventBookingCtrl {
             Integer numOfTickets = localEvent.getNumOfTickets();
             localEvent.setNumOfTickets(numOfTickets - 1);
             double fees = localEvent.getPrice();
-            // TemplateText template = new EventBookingTemplate();
-            // ArrayList<String> placeholders = new ArrayList<>();
-            // placeholders.add(user.getUsername());
-            // placeholders.add(localEvent.getName());
-            // NotificationRequest request = new NotificationRequest("email", user,
-            // template, placeholders);
-            // notificationManager.requestNotification(request);
+            TemplateText template = new EventBookingTemplate();
+            ArrayList<String> placeholders = new ArrayList<>();
+            placeholders.add(user.getUsername());
+            placeholders.add(localEvent.getName());
+            NotificationRequest request = new NotificationRequest("email", user,
+                    template, placeholders);
+            notificationManager.requestNotification(request);
             LocalEventBooking temp = new LocalEventBooking(userID, localEvent.getLocalEventID(), fees);
             model.addLocalEventBooking(temp);
             return temp;
