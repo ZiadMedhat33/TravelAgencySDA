@@ -1,8 +1,5 @@
 package com.travelagency.Booking;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import com.travelagency.model.AbstractHotelRoomBooking;
 import com.travelagency.model.HotelRoom;
 import com.travelagency.model.HotelRoomBooking;
@@ -33,22 +30,23 @@ public class HotelRoomBookingCtrl {
             String userID) {
         if (checkAvailability(hotelRoom)) {
             User user = model.getUserWithID(userID);
-            if (user == null) {
+            if (user == null || !user.getIsLoggedIn()) {
                 return null;
             }
-            String uuid = UUID.randomUUID().toString();
-            String bookingID = uuid.substring(0, 8);
+
             int diffInDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
             double fees = feesCalculator.calculateFees(hotelRoom.getPrice(), diffInDays);
             hotelRoom.setAvailable(false);
-            TemplateText template = new HotelBookingTemplate();
-            ArrayList<String> placeholders = new ArrayList<>();
-            placeholders.add(user.getUsername());
-            placeholders.add(hotelRoom.getName());
-            NotificationRequest request = new NotificationRequest("email", user, template, placeholders);
-            notificationManager.requestNotification(request);
+            System.out.println(diffInDays);
+            // TemplateText template = new HotelBookingTemplate();
+            // ArrayList<String> placeholders = new ArrayList<>();
+            // placeholders.add(user.getUsername());
+            // placeholders.add(hotelRoom.getName());
+            // NotificationRequest request = new NotificationRequest("email", user,
+            // template, placeholders);
+            // notificationManager.requestNotification(request);
             user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
-            AbstractHotelRoomBooking temp = new HotelRoomBooking(bookingID, checkInDate, checkOutDate, userID,
+            AbstractHotelRoomBooking temp = new HotelRoomBooking(checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
             model.addHotelRoomBooking(temp);
             return temp;
@@ -57,16 +55,15 @@ public class HotelRoomBookingCtrl {
     }
 
     public boolean cancelBooking(String bookingID) {
-        ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
-        for (int i = 0; i < bookings.size(); i++) {
-            String ID = bookings.get(i).getBookingID();
-            HotelRoom room = model.getHotelRoomWithID(bookings.get(i).getHotelRoomID());
-            if (ID.equals(bookingID)) {
-                room.setAvailable(true);
-                return model.removeHotelRoomBooking(bookings.get(i));
-            }
+        AbstractHotelRoomBooking booking = model.getHotelRoomBookingWithId(bookingID);
+        if (booking == null) {
+            return true;
         }
-        return false;
+        User user = model.getUserWithID(booking.getUserID());
+        if (user == null || !user.getIsLoggedIn()) {
+            return false;
+        }
+        return model.removeHotelRoomBooking(booking);
     }
 
     public void setFeesCalculator(IHotelFeesCalculator feesCalculator) {

@@ -8,12 +8,13 @@ public abstract class LocalEvent {
     protected String name;
     protected Double price;
     protected int numOfTickets;
+    private static long counter = 1000;
 
-    public LocalEvent(String address, String city, String localEventID, String organizer, String name, Double price,
+    public LocalEvent(String address, String city, String organizer, String name, Double price,
             int numOfTickets) {
         this.Address = address;
         this.City = city;
-        this.LocalEventID = localEventID;
+        this.LocalEventID = "" + counter++;
         this.Organizer = organizer;
         this.name = name;
         this.price = price;

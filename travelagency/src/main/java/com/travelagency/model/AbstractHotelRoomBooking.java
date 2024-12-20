@@ -11,10 +11,11 @@ public abstract class AbstractHotelRoomBooking {
     protected String hotelRoomID;
     protected String hotel;
     protected double fees;
+    static private long counter = 1000;
 
-    public AbstractHotelRoomBooking(String bookingID, LocalDate checkInDate, LocalDate checkOutDate, String userID,
+    public AbstractHotelRoomBooking(LocalDate checkInDate, LocalDate checkOutDate, String userID,
             String hotelRoomID, String hotel, double fees) {
-        this.bookingID = bookingID;
+        this.bookingID = "" + counter++;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.userID = userID;

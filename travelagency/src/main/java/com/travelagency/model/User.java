@@ -10,11 +10,12 @@ public abstract class User {
     protected String phoneNumber;
     protected boolean isLoggedIn;
     protected ArrayList<LocalEvent> recommendedEvents;
+    private static long counter = 1000;
 
-    public User(String username, String password, String userID, String Mail, String phoneNumber, boolean isLoggedIn) {
+    public User(String username, String password, String Mail, String phoneNumber, boolean isLoggedIn) {
         this.username = username;
         this.password = password;
-        this.userID = userID;
+        this.userID = "" + counter++;
         this.Mail = Mail;
         this.phoneNumber = phoneNumber;
         this.isLoggedIn = isLoggedIn;

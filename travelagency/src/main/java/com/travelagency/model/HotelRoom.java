@@ -8,13 +8,14 @@ public abstract class HotelRoom {
     protected boolean Available;
     protected String name;
     protected Double price;
+    static private long counter = 1000;
 
-    public HotelRoom(String Hotel, String City, String Address, String HotelRoomID, boolean Available, String name,
+    public HotelRoom(String Hotel, String City, String Address, boolean Available, String name,
             Double price) {
         this.Hotel = Hotel;
         this.City = City;
         this.Address = Address;
-        this.HotelRoomID = HotelRoomID;
+        this.HotelRoomID = counter++ + "";
         this.Available = Available;
         this.name = name;
         this.price = price;

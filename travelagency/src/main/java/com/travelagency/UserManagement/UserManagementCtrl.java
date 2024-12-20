@@ -24,22 +24,22 @@ public class UserManagementCtrl {
         this.notificationManager = manager;
     }
 
-    public boolean login(String userName, String password) {
+    public User login(String userName, String password) {
         User user = validationMethod.validateCredentials(userName, password, model.getUsers());
         if (user != null) {
             user.setLoggedIn(true);
-            return true;
+            return user;
         }
-        return false;
+        return user;
     }
 
-    public boolean logout(String userID) {
+    public User logout(String userID) {
         User user = model.getUserWithID(userID);
         if (user != null) {
             user.setLoggedIn(false);
-            return true;
+            return user;
         }
-        return false;
+        return null;
     }
 
     public User Register(String userName, String password, String mail, String phoneNumber) {
@@ -61,8 +61,8 @@ public class UserManagementCtrl {
         }
 
         if (available) {
-            User user = new StandardUser(userName, password, userID, mail, phoneNumber, false);
-            TemplateText template = new RegisterTemplate();
+            User user = new StandardUser(userName, password, mail, phoneNumber, false);
+            // TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
             // NotificationRequest request1 = new NotificationRequest("email", user,
@@ -79,24 +79,28 @@ public class UserManagementCtrl {
 
     }
 
-    public boolean updatePassword(String userID, String newPassword) {
+    public User updatePassword(String userID, String newPassword) {
         User user = model.getUserWithID(userID);
+        if (user == null)
+            return null;
         String userName = user.getUsername();
         String password = user.getPassword();
         if (validationMethod.validateCredentials(userName, password, model.getUsers()) != null) {
             if (user.getIsLoggedIn()) {
-                user.setPassword(password);
-                TemplateText template = new ResetPasswordTemplate();
-                ArrayList<String> placeholders = new ArrayList<>();
-                placeholders.add(user.getUsername());
-                NotificationRequest request1 = new NotificationRequest("email", user, template, placeholders);
-                NotificationRequest request2 = new NotificationRequest("sms", user, template, placeholders);
-                notificationManager.requestNotification(request1);
-                notificationManager.requestNotification(request2);
-                return true;
+                user.setPassword(newPassword);
+                // TemplateText template = new ResetPasswordTemplate();
+                // ArrayList<String> placeholders = new ArrayList<>();
+                // placeholders.add(user.getUsername());
+                // NotificationRequest request1 = new NotificationRequest("email", user,
+                // template, placeholders);
+                // NotificationRequest request2 = new NotificationRequest("sms", user, template,
+                // placeholders);
+                // notificationManager.requestNotification(request1);
+                // notificationManager.requestNotification(request2);
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
     public boolean checkMail(String mail) {
