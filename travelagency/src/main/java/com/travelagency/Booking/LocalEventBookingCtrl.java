@@ -3,6 +3,10 @@ package com.travelagency.Booking;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.travelagency.NotificationModule.EventBookingTemplate;
+import com.travelagency.NotificationModule.NotificationManager;
+import com.travelagency.NotificationModule.NotificationRequest;
+import com.travelagency.NotificationModule.TemplateText;
 import com.travelagency.model.AbstractLocalEventBooking;
 import com.travelagency.model.LocalEvent;
 import com.travelagency.model.LocalEventBooking;
@@ -12,9 +16,11 @@ import com.travelagency.model.User;
 public class LocalEventBookingCtrl {
 
     protected Model model;
+    private NotificationManager notificationManager;
 
-    public LocalEventBookingCtrl(Model model) {
+    public LocalEventBookingCtrl(Model model, NotificationManager notificationManager) {
         this.model = model;
+        this.notificationManager = notificationManager;
     }
 
     public boolean checkAvailability(LocalEvent localEvent) {
@@ -33,6 +39,12 @@ public class LocalEventBookingCtrl {
             Integer numOfTickets = localEvent.getNumOfTickets();
             localEvent.setNumOfTickets(numOfTickets - 1);
             double fees = localEvent.getPrice();
+            TemplateText template = new EventBookingTemplate();
+            ArrayList<String> placeholders = new ArrayList<>();
+            placeholders.add(user.getUsername());
+            placeholders.add(localEvent.getName());
+            NotificationRequest request = new NotificationRequest("email", user, template, placeholders);
+            notificationManager.requestNotification(request);
             LocalEventBooking temp = new LocalEventBooking(bookingID, userID, localEvent.getLocalEventID(), fees);
             model.addLocalEventBooking(temp);
             return temp;

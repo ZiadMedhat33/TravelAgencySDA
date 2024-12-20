@@ -2,7 +2,7 @@ package com.travelagency.NotificationModule;
 
 public class HotelBookingTemplate extends TemplateText {
     public HotelBookingTemplate() {
-        super("Hotel booking", "Dear {x}, a reservation for hotel {x} has been confirmed \n");
+        super("Dear {x}, a reservation for hotel {x} has been confirmed \n", "Hotel Booking");
         super.setPlaceholdersNum(2);
     }
 }

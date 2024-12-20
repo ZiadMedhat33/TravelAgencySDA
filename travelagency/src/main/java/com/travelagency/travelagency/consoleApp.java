@@ -101,8 +101,8 @@ public class consoleApp {
                     break;
                 case 4:
                     LocalEvent event = model.getLocalEvents().get(0);
-                    LocalEventBookingCtrl eventBookingCtr = new LocalEventBookingCtrl(model);
-                    eventBookingCtr.createBooking("999", event);
+                    // LocalEventBookingCtrl eventBookingCtr = new LocalEventBookingCtrl(model);
+                    // eventBookingCtr.createBooking("999", event);
                     ArrayList<AbstractLocalEventBooking> events = model.getLocalEventBookings();
                     for (int i = 0; i < events.size(); i++) {
                         AbstractLocalEventBooking eventBooking = events.get(i);
