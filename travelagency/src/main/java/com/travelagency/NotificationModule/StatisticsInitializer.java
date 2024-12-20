@@ -2,7 +2,6 @@ package com.travelagency.NotificationModule;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.travelagency.model.Notifications;
 
 public class StatisticsInitializer {
     private Map<String, NotificationStatistics> statisticsTypes = new HashMap<>();

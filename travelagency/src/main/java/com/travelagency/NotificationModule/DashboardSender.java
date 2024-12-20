@@ -1,7 +1,8 @@
 package com.travelagency.NotificationModule;
+
 import com.travelagency.model.Model;
-import com.travelagency.model.Notifications;
 import com.travelagency.model.User;
+
 public class DashboardSender implements NotificationSender {
     @Override
     public void sendNotification(Notification notification, Notifications notificationsData, Model usersModel) {
@@ -15,7 +16,8 @@ public class DashboardSender implements NotificationSender {
         }
         notificationsData.addNotification(notification);
     }
-    public boolean isValidReciever(String id, Model usersModel){
+
+    public boolean isValidReciever(String id, Model usersModel) {
         User user = usersModel.getUserWithID(id);
         boolean isValid = (user != null);
         return isValid;

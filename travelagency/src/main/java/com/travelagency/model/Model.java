@@ -18,61 +18,65 @@ public abstract class Model {
     }
 
     public boolean addHotelRoom(HotelRoom room) {
+        updateDataBase("mimics that it added hotel room");
         if (HotelRooms.add(room))
             return true;
         return false;
     }
 
     public boolean removeHotelRoom(HotelRoom room) {
+        updateDataBase("mimics that it removed hotel room");
         if (HotelRooms.remove(room))
             return true;
         return false;
     }
 
     public boolean addLocalEvent(LocalEvent event) {
+        updateDataBase("mimics that it added local event");
         if (LocalEvents.add(event))
             return true;
         return false;
     }
 
     public boolean removeLocalEvent(LocalEvent event) {
+        updateDataBase("mimics that it removed local event ");
         if (LocalEvents.remove(event))
             return true;
         return false;
     }
 
     public boolean removeUser(User user) {
+        updateDataBase("mimics that it added user");
         if (Users.remove(user))
             return true;
         return false;
     }
 
     public boolean addUser(User user) {
-        if(Users.add(user)) {
+        updateDataBase("mimics that it removed user");
+        if (Users.add(user)) {
             return true;
         }
         return false;
     }
 
-    public boolean addHotelRoomUser(User user) {
-        if (Users.add(user))
-            return true;
-        return false;
-    }
-
     public boolean addHotelRoomBooking(AbstractHotelRoomBooking booking) {
+        updateDataBase("mimics that it added hotel room booking");
         return hotelRoomBookings.add(booking);
     }
 
     public boolean removeHotelRoomBooking(AbstractHotelRoomBooking booking) {
+        updateDataBase("mimics that it removed hotel room booking");
         return hotelRoomBookings.remove(booking);
     }
 
     public boolean addLocalEventBooking(AbstractLocalEventBooking booking) {
+        updateDataBase("mimics that it added local event booking");
         return localEventBookings.add(booking);
     }
 
     public boolean removeLocalEventBooking(AbstractLocalEventBooking booking) {
+        updateDataBase("mimicks that it removed local hotel booking booking");
         return localEventBookings.remove(booking);
     }
 
@@ -176,5 +180,9 @@ public abstract class Model {
 
     public void takeFromDatabaseHotelBookings() {
         // mimicking that it worte a query to take from database hotel room bookings
+    }
+
+    public void updateDataBase(String query) {
+        // mimicking that it updates the database by writing a query
     }
 }

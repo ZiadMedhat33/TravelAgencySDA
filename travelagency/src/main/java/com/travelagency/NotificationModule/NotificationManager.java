@@ -1,7 +1,7 @@
 package com.travelagency.NotificationModule;
 
 import java.util.ArrayList;
-import com.travelagency.model.Notifications;
+
 import com.travelagency.model.Model;
 
 public class NotificationManager {

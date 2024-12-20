@@ -1,7 +1,7 @@
 package com.travelagency.model;
 
-public class NormelModel extends Model {
-        public NormelModel() {
+public class NormalModel extends Model {
+        public NormalModel() {
                 super();
                 takeFromDatabaseHotelRooms(null);
                 takeFromHotelProvider();

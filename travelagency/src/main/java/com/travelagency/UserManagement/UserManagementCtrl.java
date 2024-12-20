@@ -3,7 +3,6 @@ package com.travelagency.UserManagement;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.travelagency.NotificationModule.EventBookingTemplate;
 import com.travelagency.NotificationModule.NotificationManager;
 import com.travelagency.NotificationModule.NotificationRequest;
 import com.travelagency.NotificationModule.RegisterTemplate;
@@ -43,7 +42,7 @@ public class UserManagementCtrl {
         return false;
     }
 
-    public boolean register(String userName, String password, String mail, String phoneNumber) {
+    public User Register(String userName, String password, String mail, String phoneNumber) {
 
         String uuid = UUID.randomUUID().toString();
         String userID = uuid.substring(0, 9);
@@ -66,15 +65,17 @@ public class UserManagementCtrl {
             TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            NotificationRequest request1 = new NotificationRequest("email", user, template, placeholders);
-            NotificationRequest request2 = new NotificationRequest("sms", user, template, placeholders);
+            // NotificationRequest request1 = new NotificationRequest("email", user,
+            // template, placeholders);
+            // NotificationRequest request2 = new NotificationRequest("sms", user, template,
+            // placeholders);
 
-            notificationManager.requestNotification(request1);
-            notificationManager.requestNotification(request2);
+            // notificationManager.requestNotification(request1);
+            // notificationManager.requestNotification(request2);
             model.addUser(user);
-            return true;
+            return user;
         } else
-            return false;
+            return null;
 
     }
 
