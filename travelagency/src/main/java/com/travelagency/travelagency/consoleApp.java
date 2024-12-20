@@ -18,22 +18,22 @@ public class consoleApp {
         NotificationManager manager = new NotificationManager(notifications, model);
         UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(), model, manager);
         ctrl.Register("111", "111", "111", "111");
-        EmailNotificationStatistics stats = EmailNotificationStatistics.getInstance(notifications);
-        ArrayList<Notification> successful = notifications.getStatusNotifications(true);
-        ArrayList<Notification> unsuccessful = notifications.getStatusNotifications(false);
-        System.out.println("Size" + notifications.notifications.size());
-        System.out.println("Successful notifications");
-        for (Notification notification : successful) {
-            System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
-        }
-        System.out.println("Unsuccessful notifications");
-        for (Notification notification : unsuccessful) {
-            System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
-        }
-        System.out.println("getMostNotified " + stats.getMostNotified());
-        System.out.println("getMostSentTemplate " + stats.getMostSentTemplate());
-        System.out.println("getNumberOfSuccessfull " + stats.getNumberOfSuccessfull());
-        System.out.println("getNumberOfUnSuccessfull " + stats.getNumberOfUnSuccessfull());
+        // EmailNotificationStatistics stats = EmailNotificationStatistics.getInstance(notifications);
+        // ArrayList<Notification> successful = notifications.getStatusNotifications(true);
+        // ArrayList<Notification> unsuccessful = notifications.getStatusNotifications(false);
+        // System.out.println("Size" + notifications.notifications.size());
+        // System.out.println("Successful notifications");
+        // for (Notification notification : successful) {
+        //     System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
+        // }
+        // System.out.println("Unsuccessful notifications");
+        // for (Notification notification : unsuccessful) {
+        //     System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
+        // }
+        // System.out.println("getMostNotified " + stats.getMostNotified());
+        // System.out.println("getMostSentTemplate " + stats.getMostSentTemplate());
+        // System.out.println("getNumberOfSuccessfull " + stats.getNumberOfSuccessfull());
+        // System.out.println("getNumberOfUnSuccessfull " + stats.getNumberOfUnSuccessfull());
         /*
          * System.out.println("press 1 to search/view hotel rooms");
          * System.out.println("press 2 to search/view local events");
