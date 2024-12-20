@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.travelagency.model.User;
 
-public abstract class BaseDecorator extends NotificationMaker {
+public class BaseDecorator extends NotificationMaker {
     private NotificationMaker notificationMaker;
 
     public BaseDecorator(NotificationMaker notificationMaker) {

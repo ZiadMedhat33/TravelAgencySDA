@@ -3,7 +3,7 @@ package com.travelagency.NotificationModule;
 import java.util.ArrayList;
 import java.util.Queue;
 import com.travelagency.model.Model;
-
+import java.util.ArrayDeque;
 public class QueueHandler {
     private Queue<Notification> notificationQueue;
     private static QueueHandler instance = null;
@@ -12,6 +12,7 @@ public class QueueHandler {
     private Model usersModel;
 
     private QueueHandler(Notifications notificationsData, Model usersModel) {
+        notificationQueue = new ArrayDeque<>();
         setter = new SenderInitializer();
         this.notificationsData = notificationsData;
         this.usersModel = usersModel;
@@ -35,6 +36,7 @@ public class QueueHandler {
         while (!notificationQueue.isEmpty()) {
             Notification toBeSent = notificationQueue.poll();
             NotificationSender sender = setter.getSender(toBeSent.getType());
+            System.out.println(toBeSent.getType());
             if (sender != null) {
                 sender.sendNotification(toBeSent, notificationsData, usersModel);
             } else {

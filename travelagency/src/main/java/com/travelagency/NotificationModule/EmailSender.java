@@ -6,6 +6,9 @@ import com.travelagency.model.User;
 public class EmailSender implements NotificationSender {
     @Override
     public void sendNotification(Notification notification, Notifications notificationsData, Model usersModel) {
+        if (notification == null || usersModel == null) {
+            throw new IllegalArgumentException("Notification or usersModel cannot be null");
+        }
         if (notification instanceof Email) {
             Email mail = (Email) notification;
             String mailText = mail.getEmail();

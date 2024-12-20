@@ -10,7 +10,7 @@ public class TemplateMaker {
         String templateString = templateChosen.getTemplateText();
         int i = 0;
         while(templateString.contains("{x}")){
-            templateString.replaceFirst("{x}", placeHolders.get(i));
+            templateString = templateString.replaceFirst("\\{x\\}", placeHolders.get(i));
             i++;
         }
         return templateString;
