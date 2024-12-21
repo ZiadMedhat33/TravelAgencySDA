@@ -17,7 +17,14 @@ public class Notifications {
         }
         return chosenNotifications;
     }
-
+    public ArrayList<Notification> getTypeSuccessfulNotifications(String type) {
+        ArrayList<Notification> chosenNotifications = new ArrayList<>();
+        for (Notification notification : notifications) {
+            if (notification.getStatus() == true && notification.getType() == type)
+                chosenNotifications.add(notification);
+        }
+        return chosenNotifications;
+    }
     public void addNotification(Notification newNotification) {
         notifications.add(newNotification);
         updateDatabaseInNotifications("adds notification");
