@@ -18,13 +18,13 @@ public class DashboardAbstract{
     return getFromDatabase.getUserByUserid(userid, model);
   }
   public ArrayList<String> getNotifications(){
-    return getFromDatabase.getNotifications(notificationGetter);
+    return getFromDatabase.getNotifications(notificationGetter,userid);
   }
   public ArrayList<String> displayFilteredNotifications(String keyword){
-    return getFromDatabase.displayFilteredNotifications(keyword,notificationGetter);
+    return getFromDatabase.getFilteredNotifications(keyword,notificationGetter,userid);
   }
   public ArrayList<AbstractHotelRoomBooking> display(){
-    return getFromDatabase.display(userid,model,notificationGetter);
+    return getFromDatabase.getHotelBookings(userid,model,notificationGetter);
   }
   public ArrayList<LocalEvent> getRecommendedEvents() {
     return getFromDatabase.getRecommendedEvents(model, userid);

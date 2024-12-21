@@ -22,18 +22,18 @@ public class GetFromDatabase{
     Map<String, String> userData = setUserData(userid, model);
     return userData;
   }
-  public ArrayList<String> getNotifications(Notifications notificationGetter){
+  public ArrayList<String> getNotifications(Notifications notificationGetter, String userid){
     ArrayList<Notification> notifications;
-    notifications = notificationGetter.getTypeSuccessfulNotifications("dashboard");
+    notifications = notificationGetter.getUserTypeSuccessfulNotifications("dashboard",userid);
     ArrayList<String> notificationResults = new ArrayList<String>();
     for (int i = 0; i < notifications.size(); i++) {
       notificationResults.add(notifications.get(i).getContent());
     }
     return notificationResults;
   }
-  public ArrayList<String> displayFilteredNotifications(String keyword,Notifications notificationGetter){
+  public ArrayList<String> getFilteredNotifications(String keyword,Notifications notificationGetter,String userid){
     ArrayList<Notification> notifications;
-    notifications = notificationGetter.getTypeSuccessfulNotifications("dashboard");
+    notifications = notificationGetter.getUserTypeSuccessfulNotifications("dashboard",userid);
     ArrayList<String> filteredNotifications = new ArrayList<String>();
     for (int i = 0; i < notifications.size(); i++) {
       if (notifications.get(i).getContent().contains(keyword)) {
@@ -42,7 +42,7 @@ public class GetFromDatabase{
     }
     return filteredNotifications;
   }
-  public ArrayList<AbstractHotelRoomBooking> display(String userid,Model model, Notifications notificationGetter) {
+  public ArrayList<AbstractHotelRoomBooking> getHotelBookings(String userid,Model model, Notifications notificationGetter) {
     ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
     ArrayList<AbstractHotelRoomBooking> userBookings = new ArrayList<AbstractHotelRoomBooking>();
     for (int i = 0; i < bookings.size(); i++) {
