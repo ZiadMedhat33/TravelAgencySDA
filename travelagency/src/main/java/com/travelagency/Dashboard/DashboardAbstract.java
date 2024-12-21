@@ -2,6 +2,7 @@ package com.travelagency.Dashboard;
 import com.travelagency.NotificationModule.Notifications;
 import com.travelagency.model.*;
 import java.util.Map;
+import com.travelagency.NotificationModule.*;
 import java.util.ArrayList;
 public class DashboardAbstract{
   protected Model model;
@@ -17,10 +18,10 @@ public class DashboardAbstract{
   public Map<String,String> getUserById(String userid){
     return getFromDatabase.getUserByUserid(userid, model);
   }
-  public ArrayList<String> getNotifications(){
+  public ArrayList<Notification> getNotifications(){
     return getFromDatabase.getNotifications(notificationGetter,userid);
   }
-  public ArrayList<String> displayFilteredNotifications(String keyword){
+  public ArrayList<Notification> displayFilteredNotifications(String keyword){
     return getFromDatabase.getFilteredNotifications(keyword,notificationGetter,userid);
   }
   public ArrayList<AbstractHotelRoomBooking> display(){

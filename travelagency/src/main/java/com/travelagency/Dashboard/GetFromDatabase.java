@@ -22,22 +22,22 @@ public class GetFromDatabase{
     Map<String, String> userData = setUserData(userid, model);
     return userData;
   }
-  public ArrayList<String> getNotifications(Notifications notificationGetter, String userid){
+  public ArrayList<Notification> getNotifications(Notifications notificationGetter, String userid){
     ArrayList<Notification> notifications;
     notifications = notificationGetter.getUserTypeSuccessfulNotifications("dashboard",userid);
-    ArrayList<String> notificationResults = new ArrayList<String>();
+    ArrayList<Notification> notificationResults = new ArrayList<Notification>();
     for (int i = 0; i < notifications.size(); i++) {
-      notificationResults.add(notifications.get(i).getContent());
+      notificationResults.add(notifications.get(i));
     }
     return notificationResults;
   }
-  public ArrayList<String> getFilteredNotifications(String keyword,Notifications notificationGetter,String userid){
+  public ArrayList<Notification> getFilteredNotifications(String keyword,Notifications notificationGetter,String userid){
     ArrayList<Notification> notifications;
     notifications = notificationGetter.getUserTypeSuccessfulNotifications("dashboard",userid);
-    ArrayList<String> filteredNotifications = new ArrayList<String>();
+    ArrayList<Notification> filteredNotifications = new ArrayList<Notification>();
     for (int i = 0; i < notifications.size(); i++) {
       if (notifications.get(i).getContent().contains(keyword)) {
-        filteredNotifications.add(notifications.get(i).getContent());
+        filteredNotifications.add(notifications.get(i));
       }
     }
     return filteredNotifications;
