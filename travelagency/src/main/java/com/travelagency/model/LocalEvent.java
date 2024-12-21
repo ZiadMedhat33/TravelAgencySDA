@@ -37,10 +37,6 @@ public abstract class LocalEvent {
         return City;
     }
 
-    public void setLocalEventID(String localEventID) {
-        LocalEventID = localEventID;
-    }
-
     public String getLocalEventID() {
         return LocalEventID;
     }

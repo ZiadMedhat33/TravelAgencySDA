@@ -178,15 +178,15 @@ public abstract class Model {
         // will return local events from the local event provider using API
     }
 
-    public void takeFromDatabaseHotelBookings() {
+    public void takeFromDatabaseHotelBookings(String query) {
         // mimicking that it worte a query to take from database hotel room bookings
     }
 
-    public void takeFromDatabaseUsers() {
+    public void takeFromDatabaseUsers(String query) {
         // mimicking that it worte a query to take from database users
     }
 
-    public void takeFromDatabaseLocalEventBookings() {
+    public void takeFromDatabaseLocalEventBookings(String query) {
         // mimicking that it worte a query to take from database local event bookings
     }
 

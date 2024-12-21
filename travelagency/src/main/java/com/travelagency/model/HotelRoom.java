@@ -37,10 +37,6 @@ public abstract class HotelRoom {
         return City;
     }
 
-    public void setHotelRoomID(String hotelRoomID) {
-        HotelRoomID = hotelRoomID;
-    }
-
     public String getHotelRoomID() {
         return HotelRoomID;
     }

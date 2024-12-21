@@ -45,10 +45,6 @@ public abstract class User {
         return phoneNumber;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
     public String getUserID() {
         return userID;
     }
