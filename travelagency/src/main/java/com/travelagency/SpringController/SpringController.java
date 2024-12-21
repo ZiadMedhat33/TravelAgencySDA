@@ -3,6 +3,7 @@ package com.travelagency.SpringController;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import com.travelagency.model.*;
+import com.travelagency.Dashboard.*;
 import com.travelagency.Booking.HotelRoomBookingCtrl;
 import com.travelagency.Booking.LocalEventBookingCtrl;
 import com.travelagency.HotelManagment.*;
@@ -132,4 +133,9 @@ public class SpringController {
         return ctrl.removeBooking(id);
     }
 
+    @GetMapping("getUserNotifications/{id}")
+    public ArrayList<Notification> getLocalEventBookings(@PathVariable("id") String id) {
+        DashboardAbstract dashboard = new Dashboard(model, id, manager.getNotificationsData());
+        return dashboard.getNotifications();
+    }
 }
