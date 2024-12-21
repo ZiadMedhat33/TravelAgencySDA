@@ -1,6 +1,7 @@
 package com.travelagency.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public abstract class AbstractHotelRoomBooking {
 
@@ -11,11 +12,11 @@ public abstract class AbstractHotelRoomBooking {
     protected String hotelRoomID;
     protected String hotel;
     protected double fees;
-    static private long counter = 1000;
 
     public AbstractHotelRoomBooking(LocalDate checkInDate, LocalDate checkOutDate, String userID,
             String hotelRoomID, String hotel, double fees) {
-        this.bookingID = "" + counter++;
+        String uuid = UUID.randomUUID().toString();
+        this.bookingID = uuid.substring(0, 10);
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.userID = userID;

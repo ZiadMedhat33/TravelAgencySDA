@@ -1,14 +1,16 @@
 package com.travelagency.model;
 
+import java.util.UUID;
+
 public abstract class AbstractLocalEventBooking {
     protected String bookingID;
     protected String userID;
     protected String localEventID;
     protected double fees;
-    static private long counter = 1000;
 
     protected AbstractLocalEventBooking(String userID, String localEventID, double fees) {
-        this.bookingID = "" + counter++;
+        String uuid = UUID.randomUUID().toString();
+        this.bookingID = uuid.substring(0, 10);
         this.userID = userID;
         this.localEventID = localEventID;
         this.fees = fees;

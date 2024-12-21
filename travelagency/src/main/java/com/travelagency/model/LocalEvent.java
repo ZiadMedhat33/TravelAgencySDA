@@ -1,5 +1,7 @@
 package com.travelagency.model;
 
+import java.util.UUID;
+
 public abstract class LocalEvent {
     protected String Address;
     protected String City;
@@ -8,13 +10,13 @@ public abstract class LocalEvent {
     protected String name;
     protected Double price;
     protected int numOfTickets;
-    private static long counter = 1000;
 
     public LocalEvent(String address, String city, String organizer, String name, Double price,
             int numOfTickets) {
+        String uuid = UUID.randomUUID().toString();
         this.Address = address;
         this.City = city;
-        this.LocalEventID = "" + counter++;
+        this.LocalEventID = uuid.substring(0, 10);
         this.Organizer = organizer;
         this.name = name;
         this.price = price;

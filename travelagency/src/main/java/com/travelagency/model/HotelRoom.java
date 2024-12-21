@@ -1,5 +1,7 @@
 package com.travelagency.model;
 
+import java.util.UUID;
+
 public abstract class HotelRoom {
     protected String Hotel;
     protected String City;
@@ -8,14 +10,14 @@ public abstract class HotelRoom {
     protected boolean Available;
     protected String name;
     protected Double price;
-    static private long counter = 1000;
 
     public HotelRoom(String Hotel, String City, String Address, boolean Available, String name,
             Double price) {
+        String uuid = UUID.randomUUID().toString();
         this.Hotel = Hotel;
         this.City = City;
         this.Address = Address;
-        this.HotelRoomID = counter++ + "";
+        this.HotelRoomID = uuid.substring(0, 10);
         this.Available = Available;
         this.name = name;
         this.price = price;

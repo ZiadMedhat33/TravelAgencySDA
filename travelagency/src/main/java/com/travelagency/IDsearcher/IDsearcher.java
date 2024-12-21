@@ -29,4 +29,12 @@ public class IDsearcher {
         return model.getLocalEventBookingWithId(id);
     }
 
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
 }

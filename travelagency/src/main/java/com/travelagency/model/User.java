@@ -1,6 +1,7 @@
 package com.travelagency.model;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public abstract class User {
     protected String username;
@@ -10,12 +11,12 @@ public abstract class User {
     protected String phoneNumber;
     protected boolean isLoggedIn;
     protected ArrayList<LocalEvent> recommendedEvents;
-    private static long counter = 1000;
 
     public User(String username, String password, String Mail, String phoneNumber, boolean isLoggedIn) {
+        String uuid = UUID.randomUUID().toString();
         this.username = username;
         this.password = password;
-        this.userID = "" + counter++;
+        this.userID = uuid.substring(0, 10);
         this.Mail = Mail;
         this.phoneNumber = phoneNumber;
         this.isLoggedIn = isLoggedIn;
