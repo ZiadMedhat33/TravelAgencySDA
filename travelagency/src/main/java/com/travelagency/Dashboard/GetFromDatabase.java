@@ -1,25 +1,21 @@
 package com.travelagency.Dashboard;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import com.travelagency.NotificationModule.*;
 import com.travelagency.model.*;
 public class GetFromDatabase{
-  private Map<String,String> setUserData(String userid,Model model) {
+  private User setUserData(String userid,Model model) {
     ArrayList<User> users = model.getUsers();
-    Map<String, String> user = new HashMap<>();
+    User user = null;
     for (int i = 0; i < users.size(); i++) {
       if (users.get(i).getUserID() == userid) {
-        user.put("email", users.get(i).getMail());
-        user.put("username", users.get(i).getUsername());
-        user.put("phoneNumber", users.get(i).getPhoneNumber());
+        user = users.get(i);
         return user;
       }
     }
     return null;
   }
-  public Map<String,String> getUserByUserid(String userid,Model model){
-    Map<String, String> userData = setUserData(userid, model);
+  public User getUserByUserid(String userid,Model model){
+    User userData = setUserData(userid, model);
     return userData;
   }
   public ArrayList<Notification> getNotifications(Notifications notificationGetter, String userid){
