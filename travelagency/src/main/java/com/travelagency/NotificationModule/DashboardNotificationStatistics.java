@@ -7,8 +7,7 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
     private Map<String, Integer> dashboardTemplates;
     private static DashboardNotificationStatistics instance = null;
 
-    private DashboardNotificationStatistics(Notifications notificationsData) {
-        super(notificationsData);
+    private DashboardNotificationStatistics() {
         dashboardTemplates = new HashMap<>();
     }
     @Override
@@ -29,9 +28,9 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
         return dash;
     }
 
-    public static DashboardNotificationStatistics getInstance(Notifications notificationsData) {
+    public static DashboardNotificationStatistics getInstance() {
         if (instance == null)
-            instance = new DashboardNotificationStatistics(notificationsData);
+            instance = new DashboardNotificationStatistics();
 
         return instance;
     }

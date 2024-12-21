@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SpringController {
     Model model = new NormalModel();
     IDsearcher searchID = new IDsearcher(model);
-    Notifications notifications = new Notifications();
-    ManagerBaseDecorator manager = new ManagerBaseDecorator(notifications, model);
+    Notifications notifications = Notifications.getInstance();
+    ManagerBaseDecorator manager = new ManagerBaseDecorator(model);
 
     @GetMapping("searchHotelRoomWithName/{name}")
     public ArrayList<HotelRoom> searchHotelRooms(@PathVariable("name") String name) {

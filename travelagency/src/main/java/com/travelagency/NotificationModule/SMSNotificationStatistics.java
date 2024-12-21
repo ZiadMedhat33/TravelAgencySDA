@@ -7,8 +7,7 @@ public class SMSNotificationStatistics extends NotificationStatistics {
     private Map<String, Integer> numberMap;
     private static SMSNotificationStatistics instance = null;
 
-    private SMSNotificationStatistics(Notifications notificationsData) {
-        super(notificationsData);
+    private SMSNotificationStatistics() {
         numberMap = new HashMap<>();
     }
     @Override
@@ -28,9 +27,9 @@ public class SMSNotificationStatistics extends NotificationStatistics {
         return sms;
     }
 
-    public static SMSNotificationStatistics getInstance(Notifications notificationsData) {
+    public static SMSNotificationStatistics getInstance() {
         if (instance == null)
-            instance = new SMSNotificationStatistics(notificationsData);
+            instance = new SMSNotificationStatistics();
 
         return instance;
     }

@@ -7,8 +7,7 @@ public class EmailNotificationStatistics extends NotificationStatistics {
     private Map<String, Integer> emailMap;
     private static EmailNotificationStatistics instance = null;
 
-    private EmailNotificationStatistics(Notifications notificationsData) {
-        super(notificationsData);
+    private EmailNotificationStatistics() {
         emailMap = new HashMap<>();
     }
     @Override
@@ -28,9 +27,9 @@ public class EmailNotificationStatistics extends NotificationStatistics {
         return email;
     }
 
-    public static EmailNotificationStatistics getInstance(Notifications notificationsData) {
+    public static EmailNotificationStatistics getInstance() {
         if (instance == null)
-            instance = new EmailNotificationStatistics(notificationsData);
+            instance = new EmailNotificationStatistics();
 
         return instance;
     }

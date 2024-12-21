@@ -5,8 +5,8 @@ import com.travelagency.model.Model;
 public class ManagerBaseDecorator extends NotificationManager {
     private NotificationManager notificationManager;
 
-    public ManagerBaseDecorator(Notifications notificationsData, Model userModel) {
-        super(notificationsData, userModel);
+    public ManagerBaseDecorator(Model userModel) {
+        super(userModel);
     }
     public void requestNotification(NotificationRequest request){
         notificationManager.requestNotification(request);

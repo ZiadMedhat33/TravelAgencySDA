@@ -67,9 +67,9 @@ public class UserManagementCtrl {
             placeholders.add(user.getUsername());
             NotificationRequest request1 = new NotificationRequest(user,template, placeholders);
             NotificationRequest request2 = new NotificationRequest(user, template,placeholders);
-            notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+            notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(model));
             notificationManagerDecorator.requestNotification(request1);
-            notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+            notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(model));
             notificationManagerDecorator.requestNotification(request2);
             return user;
         } else
@@ -91,9 +91,9 @@ public class UserManagementCtrl {
                 placeholders.add(user.getUsername());
                 NotificationRequest request1 = new NotificationRequest(user,template, placeholders);
                 NotificationRequest request2 = new NotificationRequest(user, template,placeholders);
-                notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+                notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(model));
                 notificationManagerDecorator.requestNotification(request1);
-                notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+                notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(model));
                 notificationManagerDecorator.requestNotification(request2);
                 return user;
             }

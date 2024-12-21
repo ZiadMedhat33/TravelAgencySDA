@@ -4,11 +4,15 @@ import java.util.ArrayList;
 
 public class Notifications {
     public ArrayList<Notification> notifications;
-
-    public Notifications() {
+    private static Notifications instance = null;
+    private Notifications() {
         this.notifications = new ArrayList<>();
     }
-
+    public static Notifications getInstance() {
+        if (instance == null)
+            instance = new Notifications();
+        return instance;
+    }
     public ArrayList<Notification> getStatusNotifications(boolean status) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {

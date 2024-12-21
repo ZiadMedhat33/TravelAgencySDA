@@ -14,11 +14,11 @@ import com.travelagency.UserManagement.matchingValidation;
 public class consoleApp {
     public static void main(String[] args) {
         Model model = new NormalModel();
-        Notifications notifications = new Notifications();
-        ManagerBaseDecorator manager = new ManagerBaseDecorator(notifications, model);
+        Notifications notifications = Notifications.getInstance();
+        ManagerBaseDecorator manager = new ManagerBaseDecorator(model);
         UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(), model, manager);
         ctrl.Register("111", "111", "111", "111");
-        EmailNotificationStatistics stats = EmailNotificationStatistics.getInstance(notifications);
+        EmailNotificationStatistics stats = EmailNotificationStatistics.getInstance();
         ArrayList<Notification> successful = notifications.getStatusNotifications(true);
         ArrayList<Notification> unsuccessful = notifications.getStatusNotifications(false);
         System.out.println("Size" + notifications.notifications.size());

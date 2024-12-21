@@ -43,7 +43,7 @@ public class LocalEventBookingCtrl {
             placeholders.add(localEvent.getName());
             NotificationRequest request = new NotificationRequest(user,
                     template, placeholders);
-            notificationManager.setNotificationManager(new EmailNotificationManager(notificationManager.getNotificationsData(), model));
+            notificationManager.setNotificationManager(new EmailNotificationManager(model));
             notificationManager.requestNotification(request);
             LocalEventBooking temp = new LocalEventBooking(userID, localEvent.getLocalEventID(), fees);
             model.addLocalEventBooking(temp);

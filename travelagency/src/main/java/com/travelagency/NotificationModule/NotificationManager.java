@@ -9,9 +9,9 @@ public abstract class NotificationManager {
     protected NotificationStatistics statistics;
     protected NotificationSender sender;
     protected Notifications notificationsData;
-    public NotificationManager(Notifications notificationsData, Model userModel) {
+    public NotificationManager(Model userModel) {
         this.queueHandler = QueueHandler.getInstance(userModel);
-        this.notificationsData = notificationsData;
+        this.notificationsData = Notifications.getInstance();
     }
     public abstract void requestNotification(NotificationRequest request);
 

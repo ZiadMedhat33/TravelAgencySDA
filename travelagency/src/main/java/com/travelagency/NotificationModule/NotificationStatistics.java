@@ -8,9 +8,9 @@ public abstract class NotificationStatistics {
     protected Map<String, Integer> templateMap;
     protected Notifications notificationsData;
 
-    NotificationStatistics(Notifications notificationsData) {
+    NotificationStatistics() {
         this.templateMap = new HashMap<>();
-        this.notificationsData = notificationsData;
+        this.notificationsData = Notifications.getInstance();
     }
 
     public abstract void addNotification(Notification notification);
