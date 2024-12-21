@@ -13,11 +13,11 @@ import com.travelagency.model.User;
 public class HotelRoomBookingCtrl {
 
     private Model model;
-    private NotificationManager notificationManager;
+    private ManagerBaseDecorator notificationManager;
     private IHotelFeesCalculator feesCalculator;
     private IrecommendEvents recommender;
 
-    public HotelRoomBookingCtrl(Model model, NotificationManager notificationManager) {
+    public HotelRoomBookingCtrl(Model model, ManagerBaseDecorator notificationManager) {
         this.model = model;
         feesCalculator = new HotelFeesCalculator();
         recommender = new RecommendEventsSameCity();
@@ -42,8 +42,9 @@ public class HotelRoomBookingCtrl {
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
             placeholders.add(hotelRoom.getName());
-            NotificationRequest request = new NotificationRequest("email", user,
+            NotificationRequest request = new NotificationRequest(user,
                     template, placeholders);
+            notificationManager.setNotificationManager(new EmailNotificationManager(notificationManager.getNotificationsData(), model));
             notificationManager.requestNotification(request);
             user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
             AbstractHotelRoomBooking temp = new HotelRoomBooking(checkInDate, checkOutDate, userID,
@@ -82,7 +83,7 @@ public class HotelRoomBookingCtrl {
         return model;
     }
 
-    public void setNotificationManager(NotificationManager notificationManager) {
+    public void setNotificationManager(ManagerBaseDecorator notificationManager) {
         this.notificationManager = notificationManager;
     }
 

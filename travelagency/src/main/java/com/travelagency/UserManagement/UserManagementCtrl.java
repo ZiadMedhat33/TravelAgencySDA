@@ -65,8 +65,8 @@ public class UserManagementCtrl {
             TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            NotificationRequest request1 = new NotificationRequest("email", user,template, placeholders);
-            NotificationRequest request2 = new NotificationRequest("sms", user, template,placeholders);
+            NotificationRequest request1 = new NotificationRequest(user,template, placeholders);
+            NotificationRequest request2 = new NotificationRequest(user, template,placeholders);
             notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
             notificationManagerDecorator.requestNotification(request1);
             notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
@@ -89,9 +89,8 @@ public class UserManagementCtrl {
                 TemplateText template = new ResetPasswordTemplate();
                 ArrayList<String> placeholders = new ArrayList<>();
                 placeholders.add(user.getUsername());
-                notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
-                NotificationRequest request1 = new NotificationRequest("email", user,template, placeholders);
-                NotificationRequest request2 = new NotificationRequest("sms", user, template,placeholders);
+                NotificationRequest request1 = new NotificationRequest(user,template, placeholders);
+                NotificationRequest request2 = new NotificationRequest(user, template,placeholders);
                 notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
                 notificationManagerDecorator.requestNotification(request1);
                 notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
