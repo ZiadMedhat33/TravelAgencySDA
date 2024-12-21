@@ -1,7 +1,5 @@
 package com.travelagency.NotificationModule;
-
 import java.util.ArrayList;
-
 public class TemplateText {
     public ArrayList<Language> languages;
     private String templateText;
@@ -54,5 +52,18 @@ public class TemplateText {
 
     public void setTemplateText(String templateText) {
         this.templateText = templateText;
+    }
+    public String useTemplate(ArrayList<String> placeHolders){
+        String templateString = templateText;
+        int i = 0;
+        while(templateString.contains("{x}")){
+            templateString = templateString.replaceFirst("\\{x\\}", placeHolders.get(i));
+            i++;
+        }
+        return templateString;
+    }
+    public boolean isValid(ArrayList<String> placeHolders){
+        if(placeHolders.size() == placeholdersNum)return true;
+        return false;
     }
 }

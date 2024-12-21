@@ -5,7 +5,7 @@ import com.travelagency.model.User;
 
 public class SMSSender implements NotificationSender {
     @Override
-    public void sendNotification(Notification notification, Notifications notificationsData, Model usersModel) {
+    public void sendNotification(Notification notification, Model usersModel) {
         if (notification == null || usersModel == null) {
             throw new IllegalArgumentException("Notification or usersModel cannot be null");
         }
@@ -18,7 +18,7 @@ public class SMSSender implements NotificationSender {
         } else {
             notification.setStatus(false);
         }
-        notificationsData.addNotification(notification);
+        notification.setIsSent(true);
     }
     @SuppressWarnings("null")
     public boolean isValidReciever(String id, String number, Model usersModel) {

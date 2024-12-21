@@ -19,6 +19,7 @@ public class SMSNotificationStatistics extends NotificationStatistics {
             SMS sms = (SMS) notification;
             numberMap.put(sms.getNumber(), numberMap.getOrDefault(sms.getNumber(), 0) + 1);
         }
+        notificationsData.addNotification(notification);
     }
 
     @Override

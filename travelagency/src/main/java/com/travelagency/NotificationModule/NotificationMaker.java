@@ -5,32 +5,20 @@ import java.util.ArrayList;
 import com.travelagency.model.User;
 
 public abstract class NotificationMaker {
-    protected TemplateMaker templateMaker;
-    protected QueueHandler queueHanlder;
+    protected TemplateText templateMaker;
     protected NotificationStatistics statistics;
 
-    public NotificationMaker(QueueHandler queueHandler, TemplateMaker maker) {
+    public NotificationMaker(TemplateText maker) {
         this.templateMaker = maker;
-        this.queueHanlder = queueHandler;
     }
-
-    public QueueHandler getQueueHanlder() {
-        return queueHanlder;
-    }
-
-    public TemplateMaker getTemplateMaker() {
+    public TemplateText getTemplateMaker() {
         return templateMaker;
     }
-
-    public void setQueueHanlder(QueueHandler queueHanlder) {
-        this.queueHanlder = queueHanlder;
-    }
-
-    public void setTemplateMaker(TemplateMaker templateMaker) {
+    public void setTemplateMaker(TemplateText templateMaker) {
         this.templateMaker = templateMaker;
     }
 
-    public void setTemplate(TemplateMaker maker) {
+    public void setTemplate(TemplateText maker) {
         this.templateMaker = maker;
     }
 

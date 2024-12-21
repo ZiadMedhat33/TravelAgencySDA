@@ -2,10 +2,13 @@ package com.travelagency.UserManagement;
 
 import java.util.ArrayList;
 
+import com.travelagency.NotificationModule.EmailNotificationManager;
+import com.travelagency.NotificationModule.ManagerBaseDecorator;
 import com.travelagency.NotificationModule.NotificationManager;
 import com.travelagency.NotificationModule.NotificationRequest;
 import com.travelagency.NotificationModule.RegisterTemplate;
 import com.travelagency.NotificationModule.ResetPasswordTemplate;
+import com.travelagency.NotificationModule.SMSNotificationManager;
 import com.travelagency.NotificationModule.TemplateText;
 import com.travelagency.model.Model;
 import com.travelagency.model.StandardUser;
@@ -15,12 +18,12 @@ public class UserManagementCtrl {
 
     private IValidate validationMethod;
     private Model model;
-    private NotificationManager notificationManager;
+    private ManagerBaseDecorator notificationManagerDecorator;
 
-    public UserManagementCtrl(IValidate validationMethod, Model model, NotificationManager manager) {
+    public UserManagementCtrl(IValidate validationMethod, Model model, ManagerBaseDecorator manager) {
         this.validationMethod = validationMethod;
         this.model = model;
-        this.notificationManager = manager;
+        this.notificationManagerDecorator = manager;
     }
 
     public User login(String userName, String password) {
@@ -62,12 +65,12 @@ public class UserManagementCtrl {
             TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            NotificationRequest request1 = new NotificationRequest("email", user,
-                    template, placeholders);
-            NotificationRequest request2 = new NotificationRequest("sms", user, template,
-                    placeholders);
-            notificationManager.requestNotification(request1);
-            notificationManager.requestNotification(request2);
+            NotificationRequest request1 = new NotificationRequest("email", user,template, placeholders);
+            NotificationRequest request2 = new NotificationRequest("sms", user, template,placeholders);
+            notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+            notificationManagerDecorator.requestNotification(request1);
+            notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+            notificationManagerDecorator.requestNotification(request2);
             return user;
         } else
             return null;
@@ -86,12 +89,13 @@ public class UserManagementCtrl {
                 TemplateText template = new ResetPasswordTemplate();
                 ArrayList<String> placeholders = new ArrayList<>();
                 placeholders.add(user.getUsername());
-                NotificationRequest request1 = new NotificationRequest("email", user,
-                        template, placeholders);
-                NotificationRequest request2 = new NotificationRequest("sms", user, template,
-                        placeholders);
-                notificationManager.requestNotification(request1);
-                notificationManager.requestNotification(request2);
+                notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+                NotificationRequest request1 = new NotificationRequest("email", user,template, placeholders);
+                NotificationRequest request2 = new NotificationRequest("sms", user, template,placeholders);
+                notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+                notificationManagerDecorator.requestNotification(request1);
+                notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(notificationManagerDecorator.getNotificationsData(), model));
+                notificationManagerDecorator.requestNotification(request2);
                 return user;
             }
         }

@@ -20,6 +20,7 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
             dashboardTemplates.put(dash.getTemplateName(),
                     dashboardTemplates.getOrDefault(dash.getTemplateName(), 0) + 1);
         }
+        notificationsData.addNotification(notification);
     }
 
     @Override

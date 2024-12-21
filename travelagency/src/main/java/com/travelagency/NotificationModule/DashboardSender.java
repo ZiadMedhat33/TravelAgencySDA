@@ -5,7 +5,7 @@ import com.travelagency.model.User;
 
 public class DashboardSender implements NotificationSender {
     @Override
-    public void sendNotification(Notification notification, Notifications notificationsData, Model usersModel) {
+    public void sendNotification(Notification notification, Model usersModel) {
         if (notification instanceof DashboardNotification) {
             DashboardNotification dash = (DashboardNotification) notification;
             String id = dash.getUserid();
@@ -14,7 +14,7 @@ public class DashboardSender implements NotificationSender {
         } else {
             notification.setStatus(false);
         }
-        notificationsData.addNotification(notification);
+        notification.setIsSent(true);
     }
 
     public boolean isValidReciever(String id, Model usersModel) {

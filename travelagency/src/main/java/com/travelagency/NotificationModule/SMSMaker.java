@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import com.travelagency.model.User;
 
 public class SMSMaker extends NotificationMaker {// needs modification
-    public SMSMaker(QueueHandler queueHandler, TemplateMaker maker) {
-        super(queueHandler, maker);
+    public SMSMaker(TemplateText maker) {
+        super(maker);
     }
 
     public Notification makeNotification(User user, ArrayList<String> placeholders) {
@@ -16,7 +16,7 @@ public class SMSMaker extends NotificationMaker {// needs modification
         }
         String content = templateMaker.useTemplate(placeholders);
         Notification newNotification = new SMS(content, "created", user.getUserID(), user.getPhoneNumber(),
-                templateMaker.getTemplate().getTemplateName());
+                templateMaker.getTemplateName());
         newNotification.setStatus(isValid);
         return newNotification;
     }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import com.travelagency.model.User;
 
 public class EmailMaker extends NotificationMaker {// needs modification
-    public EmailMaker(QueueHandler queueHandler, TemplateMaker maker) {
-        super(queueHandler, maker);
+    public EmailMaker(TemplateText maker) {
+        super(maker);
     }
 
     public Notification makeNotification(User user, ArrayList<String> placeholders) {
@@ -16,7 +16,7 @@ public class EmailMaker extends NotificationMaker {// needs modification
         }
         String content = templateMaker.useTemplate(placeholders);
         Notification newNotification = new Email(content, user.getUserID(), user.getMail(),
-                templateMaker.getTemplate().getTemplateName());
+                templateMaker.getTemplateName());
         newNotification.setStatus(isValid);
         return newNotification;
     }

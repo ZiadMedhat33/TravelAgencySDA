@@ -26,7 +26,7 @@ public class SpringController {
     Model model = new NormalModel();
     IDsearcher searchID = new IDsearcher(model);
     Notifications notifications = new Notifications();
-    NotificationManager manager = new NotificationManager(notifications, model);
+    ManagerBaseDecorator manager = new ManagerBaseDecorator(notifications, model);
 
     @GetMapping("searchHotelRoomWithName/{name}")
     public ArrayList<HotelRoom> searchHotelRooms(@PathVariable("name") String name) {

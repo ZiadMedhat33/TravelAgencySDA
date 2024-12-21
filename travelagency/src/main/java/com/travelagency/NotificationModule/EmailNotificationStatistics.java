@@ -19,6 +19,7 @@ public class EmailNotificationStatistics extends NotificationStatistics {
             Email mail = (Email) notification;
             emailMap.put(mail.getEmail(), emailMap.getOrDefault(mail.getEmail(), 0) + 1);
         }
+        notificationsData.addNotification(notification);
     }
 
     @Override
