@@ -7,7 +7,7 @@ public abstract class Notification {
     private String userid;
     private String templateName;
     private String type;
-    public Notification(String content, String userid, String templateName) {
+    public Notification(String type, String content, String userid, String templateName) {
         this.content = content;
         this.userid = userid;
         this.templateName = templateName;
