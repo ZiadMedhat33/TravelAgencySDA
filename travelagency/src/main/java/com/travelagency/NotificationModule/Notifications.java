@@ -3,7 +3,7 @@ package com.travelagency.NotificationModule;
 import java.util.ArrayList;
 
 public class Notifications {
-    public ArrayList<Notification> notifications;
+    private ArrayList<Notification> notifications;
     private static Notifications instance = null;
 
     private Notifications() {
@@ -13,11 +13,33 @@ public class Notifications {
     public static Notifications getInstance() {
         if (instance == null) {
             instance = new Notifications();
-            getNotificationsFromDataBase();
         }
         return instance;
     }
-
+    public ArrayList<Notification> getNotifications(){
+        return this.notifications;
+    }
+    public Notification getByNotificationId(String id) {
+        Notification chosenNotification = null;
+        for (Notification notification : notifications) {
+            if (notification.getNotificationId().equals(id)) {
+                chosenNotification = notification;
+            }
+        }
+        if (chosenNotification == null) {
+            throw new IllegalArgumentException("Notification cannot be null");
+        }
+        return chosenNotification;
+    }
+    public void removeByNotificationId(String id) {
+        for (int i = 0; i < notifications.size();i++) {
+            if (notifications.get(i).getNotificationId().equals(id)) {
+                notifications.remove(i);
+                break;
+            }
+        }
+        return;
+    }
     public ArrayList<Notification> getStatusNotifications(boolean status) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
@@ -25,10 +47,8 @@ public class Notifications {
                 chosenNotifications.add(notification);
             }
         }
-        System.out.println(chosenNotifications.size());
         return chosenNotifications;
     }
-
     public ArrayList<Notification> getUserSuccessfulNotifications(String userid) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
@@ -62,16 +82,5 @@ public class Notifications {
 
     public void addNotification(Notification newNotification) {
         notifications.add(newNotification);
-        updateDatabaseInNotifications("adds notification");
-    }
-
-    public void updateDatabaseInNotifications(String query) {
-        // mimics that it updates the notifications in the database (notifications has
-        // its own database if this notification does not exist in the database)
-    }
-
-    public static void getNotificationsFromDataBase() {
-        // function that takes the notification from the database (notifications has its
-        // own database)
     }
 }

@@ -12,6 +12,7 @@ import com.travelagency.UserManagement.UserManagementCtrl;
 import com.travelagency.UserManagement.matchingValidation;
 
 public class consoleApp {
+    @SuppressWarnings("null")
     public static void main(String[] args) {
         Model model = new NormalModel();
         Notifications notifications = Notifications.getInstance();
@@ -21,7 +22,7 @@ public class consoleApp {
         EmailNotificationStatistics stats = EmailNotificationStatistics.getInstance();
         ArrayList<Notification> successful = notifications.getStatusNotifications(true);
         ArrayList<Notification> unsuccessful = notifications.getStatusNotifications(false);
-        System.out.println("Size" + notifications.notifications.size());
+        System.out.println("Size" + notifications.getNotifications().size());
         System.out.println("Successful notifications");
         for (Notification notification : successful) {
             System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
@@ -44,6 +45,10 @@ public class consoleApp {
         for (Notification notification : unsuccessful) {
             System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
         }
+        System.out.println("Id is " + successful.get(0).getNotificationId());
+        notifications.removeByNotificationId(successful.get(0).getNotificationId());
+        Notification yes = notifications.getByNotificationId(successful.get(0).getNotificationId());
+        System.out.println(yes.getContent() + " " + yes.getUserid() + " " + yes.getType());
         /*
          * System.out.println("press 1 to search/view hotel rooms");
          * System.out.println("press 2 to search/view local events");
