@@ -19,17 +19,20 @@ public class Notifications {
     public ArrayList<Notification> getStatusNotifications(boolean status) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() == status)
+            if (notification.getOverallStatus() == status){
                 chosenNotifications.add(notification);
+            }
         }
+        System.out.println(chosenNotifications.size());
         return chosenNotifications;
     }
 
     public ArrayList<Notification> getUserSuccessfulNotifications(String userid) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() && notification.getUserid() == userid)
+            if (notification.getOverallStatus() && notification.getUserid().equals(userid)){
                 chosenNotifications.add(notification);
+            }
         }
         return chosenNotifications;
     }
@@ -37,8 +40,9 @@ public class Notifications {
     public ArrayList<Notification> getUserTypeSuccessfulNotifications(String type, String userid) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() && notification.getType() == type && notification.getUserid() == userid)
+            if (notification.getOverallStatus() && notification.getType() == type && notification.getUserid().equals(userid)){
                 chosenNotifications.add(notification);
+            }
         }
         return chosenNotifications;
     }
@@ -46,8 +50,9 @@ public class Notifications {
     public ArrayList<Notification> getTypeSuccessfulNotifications(String type) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() && notification.getType() == type)
+            if (notification.getOverallStatus() && notification.getType().equals(type)){
                 chosenNotifications.add(notification);
+            }
         }
         return chosenNotifications;
     }
