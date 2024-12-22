@@ -3,12 +3,6 @@ import com.travelagency.model.*;
 import com.travelagency.NotificationModule.*;
 import java.util.ArrayList;
 public class DashboardAbstract{
-  private User getUserById(String userid){
-    return getFromDatabase.getUserByUserid(userid, model);
-  }
-  private boolean isLoggedIn(){
-    return user.getIsLoggedIn();
-  }
   protected Model model;
   protected String userid;
   protected Notifications notificationGetter;
@@ -17,11 +11,18 @@ public class DashboardAbstract{
   protected GetFromDatabase getFromDatabase;
   protected ArrayList<LocalEvent> recommendedEvents;
   public DashboardAbstract(Model model, String userid){
+    this.getFromDatabase = new GetFromDatabase();
     this.model = model;
     this.userid = userid;
     this.notificationGetter = Notifications.getInstance();
     this.user = getUserById(userid);
     this.isLoggedIn = isLoggedIn();
+  }
+  private User getUserById(String userid){
+    return getFromDatabase.getUserByUserid(userid, model);
+  }
+  private boolean isLoggedIn(){
+    return user.getIsLoggedIn();
   }
   public ArrayList<Notification> getNotifications(){
     if (isLoggedIn == false) {

@@ -135,7 +135,7 @@ public class SpringController {
 
     @GetMapping("getUserNotifications/{id}")
     public ArrayList<Notification> getLocalEventBookings(@PathVariable("id") String id) {
-        DashboardAbstract dashboard = new Dashboard(model, id, manager.getNotificationsData());
+        DashboardAbstract dashboard = new Dashboard(model, id, notifications);
         return dashboard.getNotifications();
     }
 }

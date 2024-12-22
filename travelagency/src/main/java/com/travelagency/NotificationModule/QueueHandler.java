@@ -18,7 +18,6 @@ public class QueueHandler implements Runnable {
     }
     @Override
     public void run() {
-        System.out.println("Handling");
         while (!notificationQueue.isEmpty()) {
             NotificationPair pair = notificationQueue.poll();
             NotificationSender sender = pair.getSender();
