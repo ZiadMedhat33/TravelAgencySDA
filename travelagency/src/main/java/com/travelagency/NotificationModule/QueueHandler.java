@@ -1,13 +1,16 @@
 package com.travelagency.NotificationModule;
+
 import com.travelagency.model.Model;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+
 public class QueueHandler implements Runnable {
     private Queue<NotificationPair> notificationQueue = new ArrayDeque<>();
     private static QueueHandler instance = null;
     private Model usersModel;
     private Thread currenThread = null;
+
     private QueueHandler(Model usersModel) {
         this.usersModel = usersModel;
     }
@@ -16,6 +19,7 @@ public class QueueHandler implements Runnable {
         NotificationPair pair = new NotificationPair(notification, sender);
         this.notificationQueue.add(pair);
     }
+
     @Override
     public void run() {
         while (!notificationQueue.isEmpty()) {
@@ -28,12 +32,14 @@ public class QueueHandler implements Runnable {
             }
         }
     }
+
     public static QueueHandler getInstance(Model usersModel) {
         if (instance == null)
             instance = new QueueHandler(usersModel);
 
         return instance;
     }
+
     public void reset() {
         synchronized (this) {
             if ((currenThread != null && !currenThread.isAlive()) || currenThread == null) {
