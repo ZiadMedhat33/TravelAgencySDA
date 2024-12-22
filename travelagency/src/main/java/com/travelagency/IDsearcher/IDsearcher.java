@@ -1,5 +1,6 @@
 package com.travelagency.IDsearcher;
 
+import java.util.ArrayList;
 import com.travelagency.model.*;
 
 public class IDsearcher {
@@ -35,6 +36,18 @@ public class IDsearcher {
 
     public Model getModel() {
         return model;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return model.getUsers();
+    }
+
+    public ArrayList<AbstractHotelRoomBooking> getAllHotelRoomBookings() {
+        return model.getHotelRoomBookings();
+    }
+
+    public ArrayList<AbstractLocalEventBooking> getAllLocalEventBookings() {
+        return model.getLocalEventBookings();
     }
 
 }

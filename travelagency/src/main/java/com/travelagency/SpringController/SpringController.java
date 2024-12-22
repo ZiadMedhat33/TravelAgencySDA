@@ -138,4 +138,19 @@ public class SpringController {
         DashboardAbstract dashboard = new Dashboard(model, id, notifications);
         return dashboard.getNotifications();
     }
+
+    @GetMapping("getAllUsers")
+    public ArrayList<User> getAllUsers() {
+        return searchID.getAllUsers();
+    }
+
+    @GetMapping("getAllLocalEventBooking")
+    public ArrayList<AbstractLocalEventBooking> getAllLocalEventBookings() {
+        return searchID.getAllLocalEventBookings();
+    }
+
+    @GetMapping("getAllHotelRoomBooking")
+    public ArrayList<AbstractHotelRoomBooking> getAllHotelRoomBookings() {
+        return searchID.getAllHotelRoomBookings();
+    }
 }
