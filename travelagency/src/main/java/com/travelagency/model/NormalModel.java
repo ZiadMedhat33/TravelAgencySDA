@@ -7,6 +7,9 @@ public class NormalModel extends Model {
                 takeFromHotelProvider();
                 takeFromDatabaseLocalEvents(null);
                 takeFromLocalEventProvider();
+                takeFromDatabaseHotelBookings(null);
+                takeFromDatabaseLocalEventBookings(null);
+                takeFromDatabaseUsers(null);
         }
 
         @Override

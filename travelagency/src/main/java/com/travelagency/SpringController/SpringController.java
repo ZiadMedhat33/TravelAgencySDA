@@ -207,7 +207,7 @@ public class SpringController {
         return notifications.getByNotificationId(id);
     }
 
-    @DeleteMapping("getNotification/{id}")
+    @DeleteMapping("deleteNotification/{id}")
     public void deleteNotification(@PathVariable("id") String id) {
         notifications.removeByNotificationId(id);
     }

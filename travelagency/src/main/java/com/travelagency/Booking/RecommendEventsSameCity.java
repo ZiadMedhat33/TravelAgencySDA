@@ -14,7 +14,7 @@ public class RecommendEventsSameCity implements IrecommendEvents {
             String eventCity = events.get(i).getCity();
             LocalEvent event = events.get(i);
             if (eventCity.equals(city)) {
-                events.add(event);
+                eventsToBeRecommended.add(event);
             }
         }
         return eventsToBeRecommended;
