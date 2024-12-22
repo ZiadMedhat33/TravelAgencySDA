@@ -13,12 +13,15 @@ public class Notifications {
     public static Notifications getInstance() {
         if (instance == null) {
             instance = new Notifications();
+            getNotificationsFromDatabase();
         }
         return instance;
     }
-    public ArrayList<Notification> getNotifications(){
+
+    public ArrayList<Notification> getNotifications() {
         return this.notifications;
     }
+
     public Notification getByNotificationId(String id) {
         Notification chosenNotification = null;
         for (Notification notification : notifications) {
@@ -26,13 +29,12 @@ public class Notifications {
                 chosenNotification = notification;
             }
         }
-        if (chosenNotification == null) {
-            throw new IllegalArgumentException("Notification cannot be null");
-        }
+
         return chosenNotification;
     }
+
     public void removeByNotificationId(String id) {
-        for (int i = 0; i < notifications.size();i++) {
+        for (int i = 0; i < notifications.size(); i++) {
             if (notifications.get(i).getNotificationId().equals(id)) {
                 notifications.remove(i);
                 break;
@@ -40,6 +42,7 @@ public class Notifications {
         }
         return;
     }
+
     public ArrayList<Notification> getStatusNotifications(boolean status) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
@@ -49,6 +52,7 @@ public class Notifications {
         }
         return chosenNotifications;
     }
+
     public ArrayList<Notification> getUserSuccessfulNotifications(String userid) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
@@ -82,5 +86,16 @@ public class Notifications {
 
     public void addNotification(Notification newNotification) {
         notifications.add(newNotification);
+        updateDatabase("updates database");
+    }
+
+    public static void getNotificationsFromDatabase() {
+        // gets notifications from database (notifications has its own database seperate
+        // from the rest of the program)
+    }
+
+    public void updateDatabase(String query) {
+        // updates database (notifications has its own database seperate from the rest
+        // of the program)
     }
 }

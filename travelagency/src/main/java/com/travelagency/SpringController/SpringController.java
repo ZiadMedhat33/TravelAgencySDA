@@ -14,6 +14,7 @@ import com.travelagency.UserManagement.matchingValidation;
 import com.travelagency.IDsearcher.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,37 +32,43 @@ public class SpringController {
 
     @GetMapping("searchHotelRoomWithName/{name}")
     public ArrayList<HotelRoom> searchHotelRooms(@PathVariable("name") String name) {
-        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByName());
+        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByName(),
+                new AddStandardRoom());
         return hotelManagment.searchHotelRooms(name);
     }
 
     @GetMapping("searchHotelRoomWithName")
     public ArrayList<HotelRoom> viewHotelRooms() {
-        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByName());
+        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByName(),
+                new AddStandardRoom());
         return hotelManagment.searchHotelRooms("");
     }
 
     @GetMapping("searchHotelRoomWithID/{id}")
     public ArrayList<HotelRoom> searchHotelRoomsWithID(@PathVariable("id") String id) {
-        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByID());
+        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByID(),
+                new AddStandardRoom());
         return hotelManagment.searchHotelRooms(id);
     }
 
     @GetMapping("searchLocalEventWithName/{name}")
     public ArrayList<LocalEvent> searchLocalEvent(@PathVariable("name") String name) {
-        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByName());
+        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByName(),
+                new AddNormalLocalEvent());
         return localEventManagment.searchLocalEvents(name);
     }
 
     @GetMapping("searchLocalEventWithName")
     public ArrayList<LocalEvent> viewLocalEvent() {
-        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByName());
+        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByName(),
+                new AddNormalLocalEvent());
         return localEventManagment.searchLocalEvents("");
     }
 
     @GetMapping("searchLocalEventWithID/{id}")
     public ArrayList<LocalEvent> searchLocalEventWithID(@PathVariable("id") String id) {
-        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByID());
+        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByID(),
+                new AddNormalLocalEvent());
         return localEventManagment.searchLocalEvents(id);
     }
 
@@ -72,6 +79,13 @@ public class SpringController {
                 model, manager);
 
         return ctrl.Register(userName, password, mail, phoneNumber);
+    }
+
+    @DeleteMapping("deleteUser/{id}")
+    public boolean deleteUser(@PathVariable("id") String id) {
+        UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(),
+                model, manager);
+        return ctrl.removeUser(id);
     }
 
     @PostMapping("login/{username}/{password}")
@@ -110,7 +124,7 @@ public class SpringController {
         return booking;
     }
 
-    @PostMapping("cancelHotelRoomBooking/{id}")
+    @DeleteMapping("cancelHotelRoomBooking/{id}")
     public boolean cancelHotelRoomBooking(@PathVariable("id") String id) {
         HotelRoomBookingCtrl ctrl = new HotelRoomBookingCtrl(model, manager);
         return ctrl.cancelBooking(id);
@@ -127,7 +141,7 @@ public class SpringController {
         return booking;
     }
 
-    @PostMapping("cancelLocalEventBooking/{id}")
+    @DeleteMapping("cancelLocalEventBooking/{id}")
     public boolean cancelLocalEventBooking(@PathVariable("id") String id) {
         LocalEventBookingCtrl ctrl = new LocalEventBookingCtrl(model, manager);
         return ctrl.removeBooking(id);
@@ -186,5 +200,61 @@ public class SpringController {
     @GetMapping("getLocalEventBooking/{id}")
     public AbstractLocalEventBooking getLocalEventBooking(@PathVariable("id") String id) {
         return searchID.getLocalEventBookingWithId(id);
+    }
+
+    @GetMapping("getNotification/{id}")
+    public Notification getNotification(@PathVariable("id") String id) {
+        return notifications.getByNotificationId(id);
+    }
+
+    @DeleteMapping("getNotification/{id}")
+    public void deleteNotification(@PathVariable("id") String id) {
+        notifications.removeByNotificationId(id);
+    }
+
+    @GetMapping("getAllNotifications")
+    public ArrayList<Notification> geNotifications() {
+        return notifications.getNotifications();
+    }
+
+    //////
+    @PostMapping("addHotelRoom/{hotel}/{City}/{Address}/{Available}/{name}/{price}")
+    public boolean addHotelRoom(
+            @PathVariable("hotel") String hotel,
+            @PathVariable("City") String city,
+            @PathVariable("Address") String address,
+            @PathVariable("Available") boolean available,
+            @PathVariable("name") String name,
+            @PathVariable("price") double price) {
+        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByName(),
+                new AddStandardRoom());
+        return hotelManagment.AddHotelRoom(hotel, city, address, available, name, price);
+    }
+
+    @DeleteMapping("deleteHotelRoom/{id}")
+    public boolean deleteHotelRoom(@PathVariable("id") String id) {
+        AbstractHotelManagment hotelManagment = new HotelManagment(model, new SearchHotelRoomsByName(),
+                new AddStandardRoom());
+        return hotelManagment.removeHotelRoom(id);
+    }
+
+    @PostMapping("addLocalEvent/{address}/{city}/{organizer}/{name}/{price}/{numOfTickets}")
+    public boolean addEvent(
+            @PathVariable("address") String address,
+            @PathVariable("city") String city,
+            @PathVariable("organizer") String organizer,
+            @PathVariable("name") String name,
+            @PathVariable("price") double price,
+            @PathVariable("numOfTickets") int numOfTickets) {
+        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByName(),
+                new AddNormalLocalEvent());
+        return localEventManagment.add(address, city, organizer, name, price, numOfTickets);
+    }
+
+    @DeleteMapping("deleteLocalEvent/{id}")
+    public boolean deleteLocalEvent(@PathVariable("id") String id) {
+        AbstractLocalEventManagment localEventManagment = new LocalEventManagment(model, new SearchLocalEventsByName(),
+                new AddNormalLocalEvent());
+        return localEventManagment.removeLocalEvent(id);
     }
 }

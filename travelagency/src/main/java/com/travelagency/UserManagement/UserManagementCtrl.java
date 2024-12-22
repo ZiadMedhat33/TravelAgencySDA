@@ -44,6 +44,13 @@ public class UserManagementCtrl {
         return null;
     }
 
+    public Boolean removeUser(String id) {
+        User user = model.getUserWithID(id);
+        if (user == null)
+            return false;
+        return model.removeUser(user);
+    }
+
     public User Register(String userName, String password, String mail, String phoneNumber) {
 
         ArrayList<User> allUsers = model.getUsers();
@@ -65,7 +72,7 @@ public class UserManagementCtrl {
             TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            NotificationRequest request = new NotificationRequest(user,template, placeholders);
+            NotificationRequest request = new NotificationRequest(user, template, placeholders);
             notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(model));
             notificationManagerDecorator.requestNotification(request);
             notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(model));
@@ -88,7 +95,7 @@ public class UserManagementCtrl {
                 TemplateText template = new ResetPasswordTemplate();
                 ArrayList<String> placeholders = new ArrayList<>();
                 placeholders.add(user.getUsername());
-                NotificationRequest request = new NotificationRequest(user,template, placeholders);
+                NotificationRequest request = new NotificationRequest(user, template, placeholders);
                 notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(model));
                 notificationManagerDecorator.requestNotification(request);
                 notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(model));
