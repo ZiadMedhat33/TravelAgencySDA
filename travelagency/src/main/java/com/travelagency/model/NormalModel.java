@@ -42,7 +42,7 @@ public class NormalModel extends Model {
                 // Mimicking that it wrote a query to take from the database and returned local
                 // events
                 LocalEvents
-                                .add(new NormalLocalEvent("123 Main St", "Springfield", "John Doe",
+                                .add(new NormalLocalEvent("123 Main St", "New York", "John Doe",
                                                 "Tech Conference", 50.00, 5));
                 LocalEvents
                                 .add(new NormalLocalEvent("456 Oak Ave", "Shelbyville", "Jane Smith",

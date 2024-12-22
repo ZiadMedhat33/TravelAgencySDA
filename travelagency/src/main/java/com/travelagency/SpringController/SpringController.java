@@ -134,8 +134,57 @@ public class SpringController {
     }
 
     @GetMapping("getUserNotifications/{id}")
-    public ArrayList<Notification> getLocalEventBookings(@PathVariable("id") String id) {
+    public ArrayList<Notification> getUserNotifications(@PathVariable("id") String id) {
         DashboardAbstract dashboard = new Dashboard(model, id, notifications);
         return dashboard.getNotifications();
+    }
+
+    @GetMapping("getUserHotelRoomBookings/{id}")
+    public ArrayList<AbstractHotelRoomBooking> getUserHotelRoomBookings(@PathVariable("id") String id) {
+        DashboardAbstract dashboard = new Dashboard(model, id, notifications);
+        return dashboard.displayHotelRoomBooking();
+    }
+
+    @GetMapping("getUserLocalEventBookings/{id}")
+    public ArrayList<AbstractLocalEventBooking> getUserLocalEventBookings(@PathVariable("id") String id) {
+        DashboardAbstract dashboard = new Dashboard(model, id, notifications);
+        return dashboard.displayLocalEventBooking();
+    }
+
+    @GetMapping("getUserRecommendations/{id}")
+    public ArrayList<LocalEvent> getUserRecommendations(@PathVariable("id") String id) {
+        DashboardAbstract dashboard = new Dashboard(model, id, notifications);
+        return dashboard.getRecommendedEvents();
+    }
+
+    ///////////
+    @GetMapping("getAllUsers")
+    public ArrayList<User> getAllUsers() {
+        return searchID.getAllUsers();
+    }
+
+    @GetMapping("getAllLocalEventBooking")
+    public ArrayList<AbstractLocalEventBooking> getAllLocalEventBookings() {
+        return searchID.getAllLocalEventBookings();
+    }
+
+    @GetMapping("getAllHotelRoomBooking")
+    public ArrayList<AbstractHotelRoomBooking> getAllHotelRoomBookings() {
+        return searchID.getAllHotelRoomBookings();
+    }
+
+    @GetMapping("getUser/{id}")
+    public User getUser(@PathVariable("id") String id) {
+        return searchID.getUserWithID(id);
+    }
+
+    @GetMapping("getHotelRoomBooking/{id}")
+    public AbstractHotelRoomBooking getHotelRoomBooking(@PathVariable("id") String id) {
+        return searchID.getHotelRoomBookingWithId(id);
+    }
+
+    @GetMapping("getLocalEventBooking/{id}")
+    public AbstractLocalEventBooking getLocalEventBooking(@PathVariable("id") String id) {
+        return searchID.getLocalEventBookingWithId(id);
     }
 }
