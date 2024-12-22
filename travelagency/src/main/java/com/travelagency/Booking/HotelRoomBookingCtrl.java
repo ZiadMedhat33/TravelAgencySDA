@@ -21,6 +21,7 @@ public class HotelRoomBookingCtrl {
         this.model = model;
         feesCalculator = new HotelFeesCalculator();
         recommender = new RecommendEventsSameCity();
+        this.notificationManager = notificationManager;
     }
 
     public boolean checkAvailability(HotelRoom hotelRoom) {
@@ -45,6 +46,8 @@ public class HotelRoomBookingCtrl {
             NotificationRequest request = new NotificationRequest(user,
                     template, placeholders);
             notificationManager.setNotificationManager(new EmailNotificationManager(model));
+            notificationManager.requestNotification(request);
+            notificationManager.setNotificationManager(new DashboardNotificationManager(model));
             notificationManager.requestNotification(request);
             user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
             AbstractHotelRoomBooking temp = new HotelRoomBooking(checkInDate, checkOutDate, userID,

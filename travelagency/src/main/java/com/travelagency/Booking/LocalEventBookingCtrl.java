@@ -2,6 +2,7 @@ package com.travelagency.Booking;
 
 import java.util.ArrayList;
 
+import com.travelagency.NotificationModule.DashboardNotificationManager;
 import com.travelagency.NotificationModule.EmailNotificationManager;
 import com.travelagency.NotificationModule.EventBookingTemplate;
 import com.travelagency.NotificationModule.ManagerBaseDecorator;
@@ -44,6 +45,8 @@ public class LocalEventBookingCtrl {
             NotificationRequest request = new NotificationRequest(user,
                     template, placeholders);
             notificationManager.setNotificationManager(new EmailNotificationManager(model));
+            notificationManager.requestNotification(request);
+            notificationManager.setNotificationManager(new DashboardNotificationManager(model));
             notificationManager.requestNotification(request);
             LocalEventBooking temp = new LocalEventBooking(userID, localEvent.getLocalEventID(), fees);
             model.addLocalEventBooking(temp);
