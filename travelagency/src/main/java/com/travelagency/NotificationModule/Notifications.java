@@ -11,15 +11,17 @@ public class Notifications {
     }
 
     public static Notifications getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new Notifications();
+            getNotificationsFromDataBase();
+        }
         return instance;
     }
 
     public ArrayList<Notification> getStatusNotifications(boolean status) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() == status){
+            if (notification.getOverallStatus() == status) {
                 chosenNotifications.add(notification);
             }
         }
@@ -30,7 +32,7 @@ public class Notifications {
     public ArrayList<Notification> getUserSuccessfulNotifications(String userid) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() && notification.getUserid().equals(userid)){
+            if (notification.getOverallStatus() && notification.getUserid().equals(userid)) {
                 chosenNotifications.add(notification);
             }
         }
@@ -40,7 +42,8 @@ public class Notifications {
     public ArrayList<Notification> getUserTypeSuccessfulNotifications(String type, String userid) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() && notification.getType() == type && notification.getUserid().equals(userid)){
+            if (notification.getOverallStatus() && notification.getType() == type
+                    && notification.getUserid().equals(userid)) {
                 chosenNotifications.add(notification);
             }
         }
@@ -50,7 +53,7 @@ public class Notifications {
     public ArrayList<Notification> getTypeSuccessfulNotifications(String type) {
         ArrayList<Notification> chosenNotifications = new ArrayList<>();
         for (Notification notification : notifications) {
-            if (notification.getOverallStatus() && notification.getType().equals(type)){
+            if (notification.getOverallStatus() && notification.getType().equals(type)) {
                 chosenNotifications.add(notification);
             }
         }
@@ -63,6 +66,12 @@ public class Notifications {
     }
 
     public void updateDatabaseInNotifications(String query) {
-        // mimics that it updates the notifications in the database
+        // mimics that it updates the notifications in the database (notifications has
+        // its own database if this notification does not exist in the database)
+    }
+
+    public static void getNotificationsFromDataBase() {
+        // function that takes the notification from the database (notifications has its
+        // own database)
     }
 }
