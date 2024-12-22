@@ -37,12 +37,36 @@ public class DashboardAbstract {
     return notificationGetter.getUserTypeSuccessfulNotifications(keyword, userid);
   }
 
-  public ArrayList<AbstractHotelRoomBooking> display() {
+  public ArrayList<AbstractHotelRoomBooking> displayHotelRoomBooking() {
     if (user == null || user.getIsLoggedIn() == false) {
       return null;
     }
-    //
-    return null;
+    ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
+    ArrayList<AbstractHotelRoomBooking> bookingsToBeSent = new ArrayList<>();
+    for (int i = 0; i < bookings.size(); i++) {
+      String id = bookings.get(i).getUserID();
+      AbstractHotelRoomBooking booking = bookings.get(i);
+      if (userid.equals(id)) {
+        bookingsToBeSent.add(booking);
+      }
+    }
+    return bookingsToBeSent;
+  }
+
+  public ArrayList<AbstractLocalEventBooking> displayLocalEventBooking() {
+    if (user == null || user.getIsLoggedIn() == false) {
+      return null;
+    }
+    ArrayList<AbstractLocalEventBooking> bookings = model.getLocalEventBookings();
+    ArrayList<AbstractLocalEventBooking> bookingsToBeSent = new ArrayList<>();
+    for (int i = 0; i < bookings.size(); i++) {
+      String id = bookings.get(i).getUserID();
+      AbstractLocalEventBooking booking = bookings.get(i);
+      if (userid.equals(id)) {
+        bookingsToBeSent.add(booking);
+      }
+    }
+    return bookingsToBeSent;
   }
 
   public ArrayList<LocalEvent> getRecommendedEvents() {
