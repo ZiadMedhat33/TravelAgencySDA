@@ -45,4 +45,18 @@ public abstract class AbstractLocalEventManagment {
             int numOfTickets) {
         return add.addLocalEvent(address, city, organizer, name, price, numOfTickets, model);
     }
+
+    public ArrayList<User> filterUsersByLocalEventID(String id) {
+        ArrayList<AbstractLocalEventBooking> bookings = model.getLocalEventBookings();
+        ArrayList<User> usersToBeSent = new ArrayList<>();
+        for (int i = 0; i < bookings.size(); i++) {
+            String userid = bookings.get(i).getUserID();
+            String localEventid = bookings.get(i).getLocalEventID();
+            if (localEventid.equals(id)) {
+                User user = model.getUserWithID(userid);
+                usersToBeSent.add(user);
+            }
+        }
+        return usersToBeSent;
+    }
 }

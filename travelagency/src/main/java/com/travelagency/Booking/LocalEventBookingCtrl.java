@@ -61,4 +61,5 @@ public class LocalEventBookingCtrl {
             return false;
         return model.removeLocalEventBooking(booking);
     }
+
 }

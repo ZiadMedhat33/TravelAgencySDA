@@ -1,5 +1,8 @@
 package com.travelagency.HotelManagment;
 
+import com.travelagency.NotificationModule.EmailNotificationManager;
+import com.travelagency.NotificationModule.NotificationManager;
+import com.travelagency.NotificationModule.TemplateText;
 import com.travelagency.model.*;
 
 import java.util.ArrayList;
@@ -53,5 +56,19 @@ public abstract class AbstractHotelManagment {
     public boolean AddHotelRoom(String Hotel, String City, String Address, boolean Available, String name,
             Double price) {
         return add.addHotelRoom(Hotel, City, Address, Available, name, price, this.model);
+    }
+
+    public ArrayList<User> filterUsersByHotelRoomID(String id) {
+        ArrayList<AbstractHotelRoomBooking> bookings = model.getHotelRoomBookings();
+        ArrayList<User> usersToBeSent = new ArrayList<>();
+        for (int i = 0; i < bookings.size(); i++) {
+            String userid = bookings.get(i).getUserID();
+            String hotelRoomid = bookings.get(i).getHotelRoomID();
+            if (hotelRoomid.equals(id)) {
+                User user = model.getUserWithID(userid);
+                usersToBeSent.add(user);
+            }
+        }
+        return usersToBeSent;
     }
 }

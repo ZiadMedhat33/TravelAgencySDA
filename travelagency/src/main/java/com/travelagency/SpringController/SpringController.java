@@ -257,4 +257,19 @@ public class SpringController {
                 new AddNormalLocalEvent());
         return localEventManagment.removeLocalEvent(id);
     }
+
+    @GetMapping("getNotificationsStatistics")
+    public String getStats() {
+        String allStatistics = "General notification statistics: ";
+        NotificationStatistics statistics = EmailNotificationStatistics.getInstance();
+        allStatistics += "\n Most used template for all notification: " + statistics.getMostSentTemplate();
+        allStatistics += "\n Number Of successfull: " + statistics.getNumberOfSuccessfull();
+        allStatistics += "\n Number Of unsuccessfull: " + statistics.getNumberOfUnSuccessfull();
+        allStatistics += "\n Most notified E-mail: " + statistics.getMostNotified();
+        statistics = SMSNotificationStatistics.getInstance();
+        allStatistics += "\n Most notified number: " + statistics.getMostNotified();
+        statistics = DashboardNotificationStatistics.getInstance();
+        allStatistics += "\n Most used template for dashboard: " + statistics.getMostNotified();
+        return allStatistics;
+    }
 }
