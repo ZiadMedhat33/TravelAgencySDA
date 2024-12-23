@@ -53,19 +53,8 @@ public class UserManagementCtrl {
 
     public User Register(String userName, String password, String mail, String phoneNumber) {
 
-        ArrayList<User> allUsers = model.getUsers();
-        boolean available = true;
-
-        for (int i = 0; i < allUsers.size(); i++) {
-            String name = allUsers.get(i).getUsername();
-            String number = allUsers.get(i).getPhoneNumber();
-            String email = allUsers.get(i).getMail();
-
-            if (userName.equals(name) || mail.equals(email) || phoneNumber.equals(number)) {
-                available = false;
-            }
-        }
-
+        boolean available = checkAvailability(userName, mail, phoneNumber);
+        
         if (available) {
             User user = new StandardUser(userName, password, mail, phoneNumber, false);
             model.addUser(user);
@@ -143,5 +132,21 @@ public class UserManagementCtrl {
             }
         }
         return found;
+    }
+
+    public boolean checkAvailability(String userName, String mail, String phoneNumber) {
+        ArrayList<User> allUsers = model.getUsers();
+        boolean available = true;
+
+        for (int i = 0; i < allUsers.size(); i++) {
+            String name = allUsers.get(i).getUsername();
+            String number = allUsers.get(i).getPhoneNumber();
+            String email = allUsers.get(i).getMail();
+
+            if (userName.equals(name) || mail.equals(email) || phoneNumber.equals(number)) {
+                available = false;
+            }
+        }
+        return available;
     }
 }
