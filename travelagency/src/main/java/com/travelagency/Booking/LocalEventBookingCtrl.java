@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import com.travelagency.NotificationModule.DashboardNotificationManager;
 import com.travelagency.NotificationModule.EmailNotificationManager;
 import com.travelagency.NotificationModule.EventBookingTemplate;
-import com.travelagency.NotificationModule.ManagerBaseDecorator;
-import com.travelagency.NotificationModule.NotificationRequest;
+import com.travelagency.NotificationModule.NotificationManager;
 import com.travelagency.NotificationModule.TemplateText;
 import com.travelagency.model.AbstractLocalEventBooking;
 import com.travelagency.model.LocalEvent;
@@ -17,9 +16,9 @@ import com.travelagency.model.User;
 public class LocalEventBookingCtrl {
 
     protected Model model;
-    private ManagerBaseDecorator notificationManager;
+    private NotificationManager notificationManager;
 
-    public LocalEventBookingCtrl(Model model, ManagerBaseDecorator notificationManager) {
+    public LocalEventBookingCtrl(Model model, NotificationManager notificationManager) {
         this.model = model;
         this.notificationManager = notificationManager;
     }
@@ -42,12 +41,10 @@ public class LocalEventBookingCtrl {
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
             placeholders.add(localEvent.getName());
-            NotificationRequest request = new NotificationRequest(user,
-                    template, placeholders);
-            notificationManager.setNotificationManager(new EmailNotificationManager(model));
-            notificationManager.requestNotification(request);
-            notificationManager.setNotificationManager(new DashboardNotificationManager(model));
-            notificationManager.requestNotification(request);
+            notificationManager = new EmailNotificationManager(model);
+            notificationManager.requestNotification(user, template, placeholders);
+            notificationManager = new DashboardNotificationManager(model);
+            notificationManager.requestNotification(user, template, placeholders);
             LocalEventBooking temp = new LocalEventBooking(userID, localEvent.getLocalEventID(), fees);
             model.addLocalEventBooking(temp);
             return temp;

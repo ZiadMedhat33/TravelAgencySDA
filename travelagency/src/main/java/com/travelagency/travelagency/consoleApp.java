@@ -16,7 +16,7 @@ public class consoleApp {
     public static void main(String[] args) {
         Model model = new NormalModel();
         Notifications notifications = Notifications.getInstance();
-        ManagerBaseDecorator manager = new ManagerBaseDecorator(model);
+        NotificationManager manager = new EmailNotificationManager(model);
         UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(), model, manager);
         ctrl.Register("111", "111", "111", "111");
         EmailNotificationStatistics stats = EmailNotificationStatistics.getInstance();
@@ -46,7 +46,6 @@ public class consoleApp {
             System.out.println(notification.getContent() + " " + notification.getUserid() + " " + notification.getType());
         }
         System.out.println("Id is " + successful.get(0).getNotificationId());
-        notifications.removeByNotificationId(successful.get(0).getNotificationId());
         Notification yes = notifications.getByNotificationId(successful.get(0).getNotificationId());
         System.out.println(yes.getContent() + " " + yes.getUserid() + " " + yes.getType());
         /*

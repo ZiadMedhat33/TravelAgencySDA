@@ -13,11 +13,11 @@ import com.travelagency.model.User;
 public class HotelRoomBookingCtrl {
 
     private Model model;
-    private ManagerBaseDecorator notificationManager;
+    private NotificationManager notificationManager;
     private IHotelFeesCalculator feesCalculator;
     private IrecommendEvents recommender;
 
-    public HotelRoomBookingCtrl(Model model, ManagerBaseDecorator notificationManager) {
+    public HotelRoomBookingCtrl(Model model, NotificationManager notificationManager) {
         this.model = model;
         feesCalculator = new HotelFeesCalculator();
         recommender = new RecommendEventsSameCity();
@@ -43,12 +43,10 @@ public class HotelRoomBookingCtrl {
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
             placeholders.add(hotelRoom.getName());
-            NotificationRequest request = new NotificationRequest(user,
-                    template, placeholders);
-            notificationManager.setNotificationManager(new EmailNotificationManager(model));
-            notificationManager.requestNotification(request);
-            notificationManager.setNotificationManager(new DashboardNotificationManager(model));
-            notificationManager.requestNotification(request);
+            notificationManager = new EmailNotificationManager(model);
+            notificationManager.requestNotification(user, template, placeholders);
+            notificationManager = new DashboardNotificationManager(model);
+            notificationManager.requestNotification(user, template, placeholders);
             user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
             AbstractHotelRoomBooking temp = new HotelRoomBooking(checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
@@ -86,7 +84,7 @@ public class HotelRoomBookingCtrl {
         return model;
     }
 
-    public void setNotificationManager(ManagerBaseDecorator notificationManager) {
+    public void setNotificationManager(NotificationManager notificationManager) {
         this.notificationManager = notificationManager;
     }
 

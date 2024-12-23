@@ -6,7 +6,6 @@ import com.travelagency.model.User;
 
 public abstract class NotificationMaker {
     protected TemplateText templateMaker;
-    protected NotificationStatistics statistics;
 
     public NotificationMaker(TemplateText maker) {
         this.templateMaker = maker;

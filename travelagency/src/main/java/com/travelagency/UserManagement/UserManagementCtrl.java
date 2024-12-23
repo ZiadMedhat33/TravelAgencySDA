@@ -3,9 +3,7 @@ package com.travelagency.UserManagement;
 import java.util.ArrayList;
 
 import com.travelagency.NotificationModule.EmailNotificationManager;
-import com.travelagency.NotificationModule.ManagerBaseDecorator;
 import com.travelagency.NotificationModule.NotificationManager;
-import com.travelagency.NotificationModule.NotificationRequest;
 import com.travelagency.NotificationModule.RegisterTemplate;
 import com.travelagency.NotificationModule.ResetPasswordTemplate;
 import com.travelagency.NotificationModule.SMSNotificationManager;
@@ -18,12 +16,12 @@ public class UserManagementCtrl {
 
     private IValidate validationMethod;
     private Model model;
-    private ManagerBaseDecorator notificationManagerDecorator;
+    private NotificationManager notificationManager;
 
-    public UserManagementCtrl(IValidate validationMethod, Model model, ManagerBaseDecorator manager) {
+    public UserManagementCtrl(IValidate validationMethod, Model model, NotificationManager manager) {
         this.validationMethod = validationMethod;
         this.model = model;
-        this.notificationManagerDecorator = manager;
+        this.notificationManager = manager;
     }
 
     public User login(String userName, String password) {
@@ -72,11 +70,10 @@ public class UserManagementCtrl {
             TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            NotificationRequest request = new NotificationRequest(user, template, placeholders);
-            notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(model));
-            notificationManagerDecorator.requestNotification(request);
-            notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(model));
-            notificationManagerDecorator.requestNotification(request);
+            notificationManager=new EmailNotificationManager(model);
+            notificationManager.requestNotification(user, template, placeholders);
+            notificationManager=new SMSNotificationManager(model);
+            notificationManager.requestNotification(user, template, placeholders);
             return user;
         } else
             return null;
@@ -95,11 +92,10 @@ public class UserManagementCtrl {
                 TemplateText template = new ResetPasswordTemplate();
                 ArrayList<String> placeholders = new ArrayList<>();
                 placeholders.add(user.getUsername());
-                NotificationRequest request = new NotificationRequest(user, template, placeholders);
-                notificationManagerDecorator.setNotificationManager(new EmailNotificationManager(model));
-                notificationManagerDecorator.requestNotification(request);
-                notificationManagerDecorator.setNotificationManager(new SMSNotificationManager(model));
-                notificationManagerDecorator.requestNotification(request);
+                notificationManager=new EmailNotificationManager(model);
+                notificationManager.requestNotification(user, template, placeholders);
+                notificationManager=new SMSNotificationManager(model);
+                notificationManager.requestNotification(user, template, placeholders);
                 return user;
             }
         }
