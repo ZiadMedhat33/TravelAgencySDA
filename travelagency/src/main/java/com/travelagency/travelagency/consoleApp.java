@@ -48,6 +48,17 @@ public class consoleApp {
         System.out.println("Id is " + successful.get(0).getNotificationId());
         Notification yes = notifications.getByNotificationId(successful.get(0).getNotificationId());
         System.out.println(yes.getContent() + " " + yes.getUserid() + " " + yes.getType());
+        String allStatistics = "General notification statistics: ";
+        NotificationStatistics statistics = EmailNotificationStatistics.getInstance();
+        allStatistics+="\n Most used template for all notification: " + statistics.getMostSentTemplate();
+        allStatistics+="\n Number Of successfull: " + statistics.getNumberOfSuccessfull();
+        allStatistics+="\n Number Of unsuccessfull: " + statistics.getNumberOfUnSuccessfull();
+        allStatistics+="\n Most notified E-mail: " + statistics.getMostNotified();
+        statistics = SMSNotificationStatistics.getInstance();
+        allStatistics+="\n Most notified number: " + statistics.getMostNotified();
+        statistics = DashboardNotificationStatistics.getInstance();
+        allStatistics+="\n Most used template for dashboard: " + statistics.getMostNotified();
+        System.out.println(allStatistics);
         /*
          * System.out.println("press 1 to search/view hotel rooms");
          * System.out.println("press 2 to search/view local events");
