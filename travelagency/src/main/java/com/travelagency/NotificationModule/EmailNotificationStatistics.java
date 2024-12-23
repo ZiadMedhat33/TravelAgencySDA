@@ -24,6 +24,7 @@ public class EmailNotificationStatistics extends NotificationStatistics {
     @Override
     public String getMostNotified() {
         String email = getMostUsedFromMap(emailMap);
+        if(email.length() == 0 || email == null)email = "None";
         return email;
     }
 

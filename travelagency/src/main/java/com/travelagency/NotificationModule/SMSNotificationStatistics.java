@@ -24,6 +24,7 @@ public class SMSNotificationStatistics extends NotificationStatistics {
     @Override
     public String getMostNotified() {
         String sms = getMostUsedFromMap(numberMap);
+        if(sms.length() == 0 || sms == null)sms = "None";
         return sms;
     }
 

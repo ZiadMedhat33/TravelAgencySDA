@@ -25,6 +25,7 @@ public class DashboardNotificationStatistics extends NotificationStatistics {
     @Override
     public String getMostNotified() {
         String dash = getMostUsedFromMap(dashboardTemplates);
+        if(dash.length() == 0 || dash == null)dash = "None";
         return dash;
     }
 

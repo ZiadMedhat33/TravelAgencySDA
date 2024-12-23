@@ -59,9 +59,9 @@ public class UserManagementCtrl {
             TemplateText template = new RegisterTemplate();
             ArrayList<String> placeholders = new ArrayList<>();
             placeholders.add(user.getUsername());
-            notificationManager=new EmailNotificationManager(model);
+            notificationManager = new EmailNotificationManager(model);
             notificationManager.requestNotification(user, template, placeholders);
-            notificationManager=new SMSNotificationManager(model);
+            notificationManager = new SMSNotificationManager(model);
             notificationManager.requestNotification(user, template, placeholders);
             return user;
         } else
