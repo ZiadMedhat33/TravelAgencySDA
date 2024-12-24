@@ -2,12 +2,14 @@ package com.travelagency.UserManagement;
 
 import java.util.ArrayList;
 
+import com.travelagency.Dashboard.DashboardAbstract;
 import com.travelagency.NotificationModule.EmailNotificationManager;
 import com.travelagency.NotificationModule.NotificationManager;
 import com.travelagency.NotificationModule.RegisterTemplate;
 import com.travelagency.NotificationModule.ResetPasswordTemplate;
 import com.travelagency.NotificationModule.SMSNotificationManager;
 import com.travelagency.NotificationModule.TemplateText;
+import com.travelagency.NotificationModule.Notification;
 import com.travelagency.model.Model;
 import com.travelagency.model.StandardUser;
 import com.travelagency.model.User;
@@ -42,17 +44,10 @@ public class UserManagementCtrl {
         return null;
     }
 
-    public Boolean removeUser(String id) {
-        User user = model.getUserWithID(id);
-        if (user == null)
-            return false;
-        return model.removeUser(user);
-    }
-
     public User Register(String userName, String password, String mail, String phoneNumber) {
 
         boolean available = checkAvailability(userName, mail, phoneNumber);
-        
+
         if (available) {
             User user = new StandardUser(userName, password, mail, phoneNumber, false);
             model.addUser(user);
@@ -81,9 +76,9 @@ public class UserManagementCtrl {
                 TemplateText template = new ResetPasswordTemplate();
                 ArrayList<String> placeholders = new ArrayList<>();
                 placeholders.add(user.getUsername());
-                notificationManager=new EmailNotificationManager(model);
+                notificationManager = new EmailNotificationManager(model);
                 notificationManager.requestNotification(user, template, placeholders);
-                notificationManager=new SMSNotificationManager(model);
+                notificationManager = new SMSNotificationManager(model);
                 notificationManager.requestNotification(user, template, placeholders);
                 return user;
             }

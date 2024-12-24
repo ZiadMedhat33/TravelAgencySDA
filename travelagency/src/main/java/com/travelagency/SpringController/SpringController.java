@@ -81,13 +81,6 @@ public class SpringController {
         return ctrl.Register(userName, password, mail, phoneNumber);
     }
 
-    @DeleteMapping("deleteUser/{id}")
-    public boolean deleteUser(@PathVariable("id") String id) {
-        UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(),
-                model, manager);
-        return ctrl.removeUser(id);
-    }
-
     @PostMapping("login/{username}/{password}")
     public User login(@PathVariable("username") String username, @PathVariable("password") String password) {
         UserManagementCtrl ctrl = new UserManagementCtrl(new matchingValidation(),
