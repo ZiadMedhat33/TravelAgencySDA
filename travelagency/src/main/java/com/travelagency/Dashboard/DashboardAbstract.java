@@ -9,7 +9,6 @@ public class DashboardAbstract {
   protected String userid;
   protected Notifications notificationGetter;
   protected User user;
-  protected boolean isLoggedIn;
   protected ArrayList<LocalEvent> recommendedEvents;
 
   public DashboardAbstract(Model model, String userid) {
