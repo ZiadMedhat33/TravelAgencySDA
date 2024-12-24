@@ -50,4 +50,11 @@ public class IDsearcher {
         return model.getLocalEventBookings();
     }
 
+    public ArrayList<HotelRoom> getAllHotelRooms() {
+        return model.getHotelRooms();
+    }
+
+    public ArrayList<LocalEvent> getAllLocalEvents() {
+        return model.getLocalEvents();
+    }
 }
