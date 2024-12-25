@@ -192,5 +192,7 @@ public abstract class Model {
 
     public void updateDataBase(String query) {
         // mimicking that it updates the database by writing a query
+        // we assume that any updates happens to the entites that the model has will be
+        // automatically updated in the database
     }
 }
