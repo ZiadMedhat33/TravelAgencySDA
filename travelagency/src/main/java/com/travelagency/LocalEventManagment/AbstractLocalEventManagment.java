@@ -59,4 +59,12 @@ public abstract class AbstractLocalEventManagment {
         }
         return usersToBeSent;
     }
+
+    public void setAdd(AddLocalEvent add) {
+        this.add = add;
+    }
+
+    public AddLocalEvent getAdd() {
+        return add;
+    }
 }
