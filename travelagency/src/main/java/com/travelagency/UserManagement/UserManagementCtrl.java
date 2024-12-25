@@ -2,14 +2,12 @@ package com.travelagency.UserManagement;
 
 import java.util.ArrayList;
 
-import com.travelagency.Dashboard.DashboardAbstract;
 import com.travelagency.NotificationModule.EmailNotificationManager;
 import com.travelagency.NotificationModule.NotificationManager;
 import com.travelagency.NotificationModule.RegisterTemplate;
 import com.travelagency.NotificationModule.ResetPasswordTemplate;
 import com.travelagency.NotificationModule.SMSNotificationManager;
 import com.travelagency.NotificationModule.TemplateText;
-import com.travelagency.NotificationModule.Notification;
 import com.travelagency.model.Model;
 import com.travelagency.model.StandardUser;
 import com.travelagency.model.User;

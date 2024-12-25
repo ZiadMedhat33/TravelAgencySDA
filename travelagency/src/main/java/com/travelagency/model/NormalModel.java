@@ -64,10 +64,4 @@ public class NormalModel extends Model {
                 LocalEvents.add(new NormalLocalEvent("333 Cedar Rd", "Hill Valley", "Tom Clark", "Charity Run",
                                 60.00, 30));
         }
-
-        @Override
-        public void takeFromDatabaseUsers(String query) {
-                // will return users from the database
-                Users.add(new StandardUser("Ahmed", "12345", "@mail", "123456789", true));
-        }
 }

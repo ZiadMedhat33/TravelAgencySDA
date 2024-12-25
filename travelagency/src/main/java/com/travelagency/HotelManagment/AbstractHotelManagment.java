@@ -1,8 +1,5 @@
 package com.travelagency.HotelManagment;
 
-import com.travelagency.NotificationModule.EmailNotificationManager;
-import com.travelagency.NotificationModule.NotificationManager;
-import com.travelagency.NotificationModule.TemplateText;
 import com.travelagency.model.*;
 
 import java.util.ArrayList;
