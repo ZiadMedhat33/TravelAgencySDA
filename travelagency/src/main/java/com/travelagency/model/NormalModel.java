@@ -65,4 +65,9 @@ public class NormalModel extends Model {
                                 60.00, 30));
         }
 
+        @Override
+        public void takeFromDatabaseUsers(String query) {
+                // will return users from the database
+                Users.add(new StandardUser("Ahmed", "12345", "@mail", "123456789", true));
+        }
 }

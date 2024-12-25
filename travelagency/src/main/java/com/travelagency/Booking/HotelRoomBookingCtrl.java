@@ -47,6 +47,9 @@ public class HotelRoomBookingCtrl {
             notificationManager.requestNotification(user, template, placeholders);
             notificationManager = new DashboardNotificationManager(model);
             notificationManager.requestNotification(user, template, placeholders);
+            template = new RecommendEventTemplate();
+            placeholders = new ArrayList<>();
+            notificationManager.requestNotification(user, template, placeholders);
             user.setRecommendedEvents(recommender.recommendEvents(hotelRoom.getCity(), model));
             AbstractHotelRoomBooking temp = new HotelRoomBooking(checkInDate, checkOutDate, userID,
                     hotelRoom.getHotelRoomID(), hotelRoom.getHotel(), fees);
